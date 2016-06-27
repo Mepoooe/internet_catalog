@@ -10,7 +10,11 @@ return [
         'email',
     ],
     'edit_fields' => [
-        'name',
-        'email',
+        'name' => [
+            'type' => 'text'
+        ],
+        'email' => [
+            'type' => 'text'
+        ],
     ],
 ];
