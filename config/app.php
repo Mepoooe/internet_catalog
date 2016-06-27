@@ -157,6 +157,11 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
+         * Production
+         */
+        'Frozennode\Administrator\AdministratorServiceProvider',
+
+        /*
          * Development...
          */
         Barryvdh\Debugbar\ServiceProvider::class,

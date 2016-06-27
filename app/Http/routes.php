@@ -20,8 +20,8 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 //Route::get('/goods', 'GoodsController@index');
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('/goods/', 'GoodsController');
-    Route::post('goods/store', 'GoodsController@store');
-
-});
+//Route::group(['middleware' => 'auth'], function() {
+//    Route::resource('/goods/', 'GoodsController');
+//    Route::post('goods/store', 'GoodsController@store');
+//
+//});
