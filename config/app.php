@@ -157,9 +157,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Development
+         * Development...
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
