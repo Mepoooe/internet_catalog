@@ -8,6 +8,7 @@
     "content-hash": "8b1485987e7c5949da82435d403e52e8",
     "packages": [
         {
+
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
             "source": {
@@ -519,6 +520,7 @@
             "time": "2016-06-03 19:11:39"
         },
         {
+
             "name": "monolog/monolog",
             "version": "1.19.0",
             "source": {
@@ -950,6 +952,7 @@
             "time": "2016-05-01 08:45:47"
         },
         {
+
             "name": "symfony/console",
             "version": "v3.0.7",
             "source": {

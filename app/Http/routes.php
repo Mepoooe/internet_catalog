@@ -18,10 +18,12 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/drinks', 'DrinksController@index');
 Route::get('/admin/createDrinks', 'DrinksController@create');
 Route::post('/admin/drinks', 'DrinksController@store');
+
 //Route::get('/goods', 'GoodsController@index');
 //Route::group(['middleware' => 'auth'], function() {
 //    Route::resource('/goods/', 'GoodsController');
