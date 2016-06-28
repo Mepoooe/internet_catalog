@@ -10,7 +10,12 @@
         <label for="">Название бутылки  <br><input type="text" name="name"></label> <br>
         <label for="">Цена за единицу <br> <input type="text" name="price"></label> <br>
         <label for="">Объем <br> <input type="text" name="volume"></label> <br>
+        <label for="">Вид напитка <br>
+            Алкогольный<input type="radio" name="drinkType" value="alco">
+            Безалкогольный<input type="radio" name="drinkType" value="soft">
+        </label> 
         <label for="">Катринка <br><input type="file" name="image"></label> 
+
         <button>Отправить</button>
         {{csrf_field()}}
     </form>

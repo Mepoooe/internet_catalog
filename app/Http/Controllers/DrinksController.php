@@ -52,6 +52,11 @@ class DrinksController extends Controller
             $drink->price = $request->input('price');
             $drink->volume = $request->input('volume');
             $drink->save();
+
+            $drinks = Drinks::all()->toArray();
+            $data['drinks'] = $drinks;
+            return view('admin/tables/drinks', $data);
+           
         } catch(Exception $e) {
             Log::error('Ошибка записи');
             return redirect('/home');
