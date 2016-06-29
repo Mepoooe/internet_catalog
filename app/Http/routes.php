@@ -22,11 +22,13 @@ Route::get('/admin', 'AdminController@index');
 
 Route::get('/admin/drinks', 'DrinksController@index');
 
-Route::get('/admin/updateDrinks/{id?}', 'DrinksController@update');
+Route::get('/admin/updateDrinks/{id?}', 'DrinksController@edit');
 Route::get('/admin/createDrinks', 'DrinksController@create');
 
 Route::post('/admin/drinks', 'DrinksController@store');
-
+Route::post('/admin/drinks/{id}', 'DrinksController@update');
+//    Route::post('/admin/drinks/' ,'DrinksController@update');
+//})->where(['id'=>'[55]+']);
 //Route::get('/goods', 'GoodsController@index');
 //Route::group(['middleware' => 'auth'], function() {
 //    Route::resource('/goods/', 'GoodsController');

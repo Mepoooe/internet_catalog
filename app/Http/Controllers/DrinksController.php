@@ -43,8 +43,7 @@ class DrinksController extends Controller
             'price' => 'required|numeric',
             'volume' => 'required|numeric',
             'typeDrink'   => 'required|in:alco,soft',
-            'image' => 'image',
-            'idDrink' => 'integer'
+            'image' => 'image'
         ]);
 
         try {
@@ -92,28 +91,58 @@ class DrinksController extends Controller
             Log::error('Ошибка записи');
             return redirect('/home');
         }
-
-        
     }
 
     // отображения формы и функция для поулчения
     public function edit($id) {
-
-    }
-
-    //  функция для редактирования получает с edit 
-    // пока в разработке
-    public function update($id=null) {
         try {
-        if ($id==null) {
-            $drinks = array();
-            $data['drinks'] = $drinks;
-            return view('/admin/tables/drinks', $data);
-        }
         $drinks = Drinks::find($id);
         $data['drinks'] = $drinks;
         $data['id'] = $id;
         return view('/admin/tables/updateDrinks', $data);
+        } catch (Exception $e) {
+            Log::error('Ошибка ');
+            return redirect()->back();
+        }
+    }
+
+    //  функция для редактирования получает с edit 
+    // пока в разработке
+    public function update(Request $request, $id=null) {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+            'volume' => 'required|numeric',
+            'type_drinks'   => 'required|in:alco,soft',
+            'img' => 'image'
+        ]);
+
+        /*$drinks = Drinks::find($id);
+        $post = $request->toArray();
+        $post = $post['img'];
+        $file = $this->addImg($post);
+        $file = $file->getClientOriginalName();
+        $data['drinks'] = $post;
+        $data['id'] = $id;
+        return view('/admin/tables/drinks', $data);*/
+        try {
+        if ($id==null) {
+            return view('/admin/tables/drinks');
+        }
+        $drinks = Drinks::find($id);
+        $post = $request->toArray();
+        $post = $post['img'];
+        $file = $this->addImg($post);
+            $drinks->name = $request->input('name');
+            $drinks->price = $request->input('price');
+            $drinks->volume = $request->input('volume');
+            $drinks->type_drinks = $request->input('type_drinks');
+            $drinks->img = $file->getClientOriginalName();
+            $drinks->save();
+        $allDrinks = Drinks::all()->toArray();
+        $data['drinks'] = $allDrinks;
+        $data['id'] = $id;
+        return view('/admin/tables/drinks', $data);
         } catch (Exception $e) {
             Log::error('Ошибка ');
             return redirect()->back();

@@ -9,7 +9,6 @@
 
 </div>
 @endsection
-
 @section('content')
     <h1>Напитки</h1>
     <table class="table table-striped">
