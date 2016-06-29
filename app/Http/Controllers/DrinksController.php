@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Drinks;
 use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image ;
 
 class DrinksController extends Controller
 {
@@ -30,32 +32,68 @@ class DrinksController extends Controller
     }*/
 
     public function create() {
-        return view('/admin/tables/createDrinks');
+        $drinks = array();
+        return view('/admin/tables/createDrinks', $drinks);
     }
 
     // для помещения нового объекта в базу
-    public function store(Request $request) {
+    public function store(Request $request, $id=null) {
         $this->validate($request, [
             'name' => 'required|max:255',
             'price' => 'required|numeric',
             'volume' => 'required|numeric',
-            'image' => 'image'
+            'typeDrink'   => 'required|in:alco,soft',
+            'image' => 'image',
+            'idDrink' => 'integer'
         ]);
 
         try {
-            $file = $request->file('image');
-            $file->move('tmp', $file->getClientOriginalName());
+            // редактирование в разработке
+            /*if ($id !== 'null') {
 
+                $file = $request->file('image');
+                $file = $this->addImg($file);
+
+                $idDrink = $request->input('idDrink');
+                $drinks = Drinks::all()->find($idDrink);
+                $drinks->name = $request->input('name');
+                $drinks->price = $request->input('price');
+                $drinks->volume = $request->input('volume');
+                $drinks->img = $request->input('image');
+                $drinks->type_drinks = $request->input('typeDrink');
+                $drinks->save();
+                        
+                $drinks = Drinks::all()->toArray();
+                $data['drinks'] = $drinks;
+                $data['id'] = $idDrink;
+                return view('admin/tables/drinks', $data);
+            }*/
+            //добавление 
+            $file = $request->file('image');
+            //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
+            $file = $this->addImg($file);
+            
+
+
+            //добавление в бд
             Log::notice('Успех записи');
             $drink = new Drinks();
             $drink->name = $request->input('name');
             $drink->price = $request->input('price');
             $drink->volume = $request->input('volume');
+            $drink->type_drinks = $request->input('typeDrink');
+             $drink->img = $file->getClientOriginalName();
             $drink->save();
+            //возвращаем то что в бд
+            $drinks = Drinks::all()->toArray();
+            $data['drinks'] = $drinks;
+            return view('admin/tables/drinks', $data);
         } catch(Exception $e) {
             Log::error('Ошибка записи');
             return redirect('/home');
         }
+
+        
     }
 
     // отображения формы и функция для поулчения
@@ -64,8 +102,22 @@ class DrinksController extends Controller
     }
 
     //  функция для редактирования получает с edit 
-    public function update($id) {
-
+    // пока в разработке
+    public function update($id=null) {
+        try {
+        if ($id==null) {
+            $drinks = array();
+            $data['drinks'] = $drinks;
+            return view('/admin/tables/drinks', $data);
+        }
+        $drinks = Drinks::find($id);
+        $data['drinks'] = $drinks;
+        $data['id'] = $id;
+        return view('/admin/tables/updateDrinks', $data);
+        } catch (Exception $e) {
+            Log::error('Ошибка ');
+            return redirect()->back();
+        }
     }
 
     // отображение списока файлов 
@@ -75,8 +127,46 @@ class DrinksController extends Controller
         return view('admin/tables/drinks', $data);
     }
 
-    // отображение списока файлов 
-    public function destroy($id) {
+    // удаление файла 
+    public function destroy($id=null) {
+        try {
+        //$drinks = Drinks::where('id', '=', $id)->find($id);
+        //$imgName = $drinks->img;
 
+        Drinks::destroy($id);
+        //удаление файла из папки tmp
+        //$filePath = '/tmp/czi01QPcWvU.jpg';
+        //if(is_file($filePath)){
+        //    unlink("$filePath"); 
+        //}
+
+        $drinks = Drinks::all()->toArray();
+        $data['drinks'] = $drinks;
+        $data['id'] = $id;
+        return view('admin/tables/drinks', $data);
+        } catch (Exception $e) {
+            Log::error('Ошибка записи');
+            return redirect()->back();
+        }
     }
+    //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
+    public function addImg ($file) {
+            $file->getClientOriginalName();
+            $filePath = '/tmp/$file';
+            if(is_file($filePath)){
+                unlink("$filePath"); 
+            }
+
+            $image = Image::make($file)
+                ->resize(100,null, function($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save('./tmp/cut-'.$file->getClientOriginalName());
+
+            $file->move('tmp', $file->getClientOriginalName());
+            $file->getClientOriginalName();
+            return $file;
+        }
+
+
 }

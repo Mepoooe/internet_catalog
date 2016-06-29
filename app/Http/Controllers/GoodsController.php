@@ -25,15 +25,13 @@ class GoodsController extends Controller
 
     // для помещения нового объекта в базу
     public function store(Request $request) {
-<<<<<<< HEAD
+
         $this->validate($request, [
             'name' => 'required|max:255',
             'price' => 'required|numeric',
             'image' => 'image'
         ]);
 
-=======
->>>>>>> daf2e8de3fe18e484c8f47b68da3b1631d547ca6
         try {
             $file = $request->file('image');
             $file->move('tmp', $file->getClientOriginalName());

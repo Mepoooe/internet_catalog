@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,8 +17,8 @@ class CreateDrinksTable extends Migration
             $table->string('name');
             $table->integer('volume');
             $table->integer('price');
-            $table->string('soft_drinks');
-            $table->string('alcoholic_drinks');
+            $table->string('type_drinks');
+            $table->string('img');
             $table->timestamps();
         });
     }
