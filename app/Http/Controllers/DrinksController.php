@@ -63,6 +63,7 @@ class DrinksController extends Controller
             $drink->type_drinks = $request->input('typeDrink');
              $drink->img = $file->getClientOriginalName();
             $drink->save();
+
             //возвращаем то что в бд
             $drinks = Drinks::all()->toArray();
             $data['drinks'] = $drinks;
