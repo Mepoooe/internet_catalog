@@ -56,5 +56,5 @@
             @endfor
         </table>
     </div>
-
+    
 @endsection

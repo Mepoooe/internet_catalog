@@ -147,6 +147,12 @@ class DrinksController extends Controller
         }
         try {
         $drinks = Drinks::where('id', '=', $id)->find($id);
+        if ($drinks == null) {
+            $drinks = Drinks::all()->toArray();
+            $data['drinks'] = $drinks;
+            return view('/admin/tables/drinks', $data);
+        }
+        return  view('/admin/tables/drinks', $data);
         $imgName = $drinks->img;
 
         //удаление файла из папки tmp
