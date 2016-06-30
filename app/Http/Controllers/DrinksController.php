@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Drinks;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image ;
+use File;
 
 class DrinksController extends Controller
 {
@@ -47,33 +48,12 @@ class DrinksController extends Controller
         ]);
 
         try {
-            // редактирование в разработке
-            /*if ($id !== 'null') {
-
-                $file = $request->file('image');
-                $file = $this->addImg($file);
-
-                $idDrink = $request->input('idDrink');
-                $drinks = Drinks::all()->find($idDrink);
-                $drinks->name = $request->input('name');
-                $drinks->price = $request->input('price');
-                $drinks->volume = $request->input('volume');
-                $drinks->img = $request->input('image');
-                $drinks->type_drinks = $request->input('typeDrink');
-                $drinks->save();
-                        
-                $drinks = Drinks::all()->toArray();
-                $data['drinks'] = $drinks;
-                $data['id'] = $idDrink;
-                return view('admin/tables/drinks', $data);
-            }*/
+            
             //добавление 
             $file = $request->file('image');
             //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
             $file = $this->addImg($file);
             
-
-
             //добавление в бд
             Log::notice('Успех записи');
             $drink = new Drinks();
@@ -117,17 +97,19 @@ class DrinksController extends Controller
             'img' => 'image'
         ]);
 
-        /*$drinks = Drinks::find($id);
-        $post = $request->toArray();
-        $post = $post['img'];
-        $file = $this->addImg($post);
-        $file = $file->getClientOriginalName();
-        $data['drinks'] = $post;
-        $data['id'] = $id;
-        return view('/admin/tables/drinks', $data);*/
         try {
         if ($id==null) {
             return view('/admin/tables/drinks');
+        }
+        //удаление файла из папки tmp
+        $drinks = Drinks::where('id', '=', $id)->find($id);
+        $imgName = $drinks->img;
+
+        $filePath = "./tmp/".$imgName;
+
+        if(is_file($filePath)){
+            File::delete("./tmp/cut-".$imgName);
+            File::delete("./tmp/".$imgName);
         }
         $drinks = Drinks::find($id);
         $post = $request->toArray();
@@ -158,17 +140,23 @@ class DrinksController extends Controller
 
     // удаление файла 
     public function destroy($id=null) {
+        if ($id==null) {
+            $drinks = Drinks::all()->toArray();
+            $data['drinks'] = $drinks;
+            return view('/admin/tables/drinks', $data);
+        }
         try {
-        //$drinks = Drinks::where('id', '=', $id)->find($id);
-        //$imgName = $drinks->img;
+        $drinks = Drinks::where('id', '=', $id)->find($id);
+        $imgName = $drinks->img;
 
-        Drinks::destroy($id);
         //удаление файла из папки tmp
-        //$filePath = '/tmp/czi01QPcWvU.jpg';
-        //if(is_file($filePath)){
-        //    unlink("$filePath"); 
-        //}
+        $filePath = "./tmp/".$imgName;
 
+        if(is_file($filePath)){
+            File::delete("./tmp/cut-".$imgName);
+            File::delete("./tmp/".$imgName);
+        }
+        Drinks::destroy($id);
         $drinks = Drinks::all()->toArray();
         $data['drinks'] = $drinks;
         $data['id'] = $id;
