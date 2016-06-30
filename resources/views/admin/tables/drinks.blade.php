@@ -32,7 +32,9 @@
     <h1 class="col-sm-12">Напитки</h1>
     <div class="col-sm-9 col-sm-push-3">
         <a class="btn btn-success btn-block btn-lg text-uppercase"
-           href="{{url('/admin/createDrinks')}}">Добавить напиток</a>
+           href="{{url('/admin/createDrinks')}}">
+            <i class="fa fa-plus-square-o "></i>
+            Добавить напиток</a>
         <table class="table table-striped">
             @for ($i = 0; $i < count($drinks); $i++)
                 <tr>
@@ -46,10 +48,14 @@
                         </td>
                     @endforeach
                     <td>
-                        <a href="{{url('/admin/updateDrinks/'.$drinks[$i]['id'].'')}}">Редактировать запись</a>
+                        <a class="btn btn-warning" href="{{url('/admin/updateDrinks/'.$drinks[$i]['id'].'')}}">
+                            <i class="fa fa-edit"></i>
+                            Редактировать</a>
                     </td>
                     <td>
-                        <a href="{{url('/admin/drinks/'.$drinks[$i]['id'].'')}}">Удалить запись</a>
+                        <a class="btn btn-danger" href="{{url('/admin/drinks/'.$drinks[$i]['id'].'')}}">
+                            <i class="fa fa-trash-o"></i>
+                            Удалить</a>
                     </td>
 
                 </tr>
