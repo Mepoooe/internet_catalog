@@ -11,7 +11,7 @@
                             <a href="{{ url('/admin/drinks') }}">Напитки</a>
                         </li>
                         <li class="list-group-item" >
-                            <a href="{{ url('#') }}">Тест</a>
+                            <a href="{{ url('/admin/electrics') }}">Електротовары</a>
                         </li>
                         <li class="list-group-item" >
                             <a href="{{ url('#') }}">Тест</a>
@@ -62,5 +62,4 @@
             @endfor
         </table>
     </div>
-
 @endsection
