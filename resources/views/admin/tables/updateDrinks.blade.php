@@ -11,7 +11,7 @@
     <div class="col-md-6 col-md-offset-3">
         <form action="/admin/drinks/{{$id}}" method="post" enctype="multipart/form-data">
         <div class="col-sm-10">
-            <label class="col-sm-4 control-label" for="exampleInputName1">Название бутылки</label>
+            <label class="col-sm-5 control-label" for="exampleInputName1">Название бутылки</label>
             <input id="exampleInputName1" class="form-control" type="text" name="name" value="{{$drinks['name']}}">
         </div>
         <div class="col-sm-10">
@@ -46,7 +46,8 @@
                 <input type="file" id="exampleInputFile" name="img" value="{{$drinks['img']}}"></label> 
             </div>
             <div class="col-sm-10">
-                <button  class="btn btn-default">Отправить</button>
+
+                <button  class="btn btn-success">Отправить</button>
             </div>
             {{csrf_field()}}
         </form>
