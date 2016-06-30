@@ -18,7 +18,7 @@ class CreateElectricsTable extends Migration
             $table->string('name');
             $table->string('producer');
             $table->integer('price');
-            $table->enum('status', ['есть в наличии', 'нет в наличии']);
+            $table->string('status');
             $table->longText('description');
             $table->timestamps();
         });

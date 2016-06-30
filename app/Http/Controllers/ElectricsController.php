@@ -21,6 +21,14 @@ class ElectricsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'name' => 'required',
+            'producer' => 'required',
+            'price' => 'required|numeric',
+            'status' => 'required',
+            'description' => 'required',
+        ]);
         try {
             $electrics = new Electrics();
             $electrics->title = $request->input('title');
@@ -37,6 +45,7 @@ class ElectricsController extends Controller
 
         return redirect('/admin/electrics');
     }
+
     /*
      * Удаление записи с DB
      */
