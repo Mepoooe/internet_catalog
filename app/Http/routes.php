@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 //Каталог напитков
 Route::get('/catalog/drinks', 'CatalogDrinksController@index');
+Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
 
 
 //    Route::post('/admin/drinks/' ,'DrinksController@update');

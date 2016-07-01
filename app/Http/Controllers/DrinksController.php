@@ -181,7 +181,7 @@ class DrinksController extends Controller
             }
 
             $image = Image::make($file)
-                ->resize(100,null, function($constraint) {
+                ->resize(100,100, function($constraint) {
                     $constraint->aspectRatio();
                 })
                 ->save('./tmp/cut-'.$file->getClientOriginalName());
