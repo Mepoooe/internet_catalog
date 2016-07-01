@@ -1,14 +1,20 @@
 @extends ('layouts.app')
 
 @section('content')
-    @if(!empty($errors->all()))
-        @foreach ($errors->all()->atributs as $error )
-        <li>{{$error}}</li>
-        @endforeach
-    @endif
+    
     <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <form action="/admin/drinks" method="post" enctype="multipart/form-data">
+        @if(!empty($errors->all()))
+            <table class="table table-condensed">
+                
+                @foreach ($errors->all() as $error)
+                <tr>
+                    <td class="danger">{{ $error }}</td>
+                </tr>
+                @endforeach
+            </table>
+        @endif
         <div class="col-sm-10">
             <label class="col-sm-5 control-label" for="exampleInputName1">Название бутылки</label>
             <input id="exampleInputName1" class="form-control" type="text" name="name">
@@ -25,7 +31,7 @@
             <div class="radio">
             
             <label class="control-label">
-                    <input type="radio" name="typeDrink" value="alco"> Алкогольный 
+                    <input type="radio" checked name="typeDrink" value="alco"> Алкогольный 
             </label>
             <label class="control-label">
                 <input type="radio" name="typeDrink" value="soft"> Безалкогольный

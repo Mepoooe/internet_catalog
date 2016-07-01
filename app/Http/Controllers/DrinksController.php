@@ -42,9 +42,9 @@ class DrinksController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'price' => 'required|numeric',
-            'volume' => 'required|numeric',
+            'volume' => 'numeric',
             'typeDrink'   => 'required|in:alco,soft',
-            'image' => 'image'
+            'image' => 'required|image'
         ]);
 
         try {
@@ -91,11 +91,11 @@ class DrinksController extends Controller
     // пока в разработке
     public function update(Request $request, $id=null) {
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'price' => 'required|numeric',
-            'volume' => 'required|numeric',
+            'name' => 'max:255',
+            'price' => 'numeric',
+            'volume' => 'numeric',
             'type_drinks'   => 'required|in:alco,soft',
-            'img' => 'image'
+            'img' => 'required|image'
         ]);
 
         try {
@@ -153,7 +153,6 @@ class DrinksController extends Controller
             $data['drinks'] = $drinks;
             return view('/admin/tables/drinks', $data);
         }
-        return  view('/admin/tables/drinks', $data);
         $imgName = $drinks->img;
 
         //удаление файла из папки tmp
