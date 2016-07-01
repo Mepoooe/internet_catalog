@@ -2,13 +2,18 @@
 
 @section('content')
 
-    @if(!empty($errors->all()))
-        @foreach ($errors->all()->atributs as $error )
-        <li>{{$error}}</li>
-        @endforeach
-    @endif
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
+    @if(!empty($errors->all()))
+            <table class="table table-condensed">
+                
+                @foreach ($errors->all() as $error)
+                <tr>
+                    <td class="danger">{{ $error }}</td>
+                </tr>
+                @endforeach
+            </table>
+    @endif
         <form action="/admin/drinks/{{$id}}" method="post" enctype="multipart/form-data">
         <div class="col-sm-10">
             <label class="col-sm-5 control-label" for="exampleInputName1">Название бутылки</label>
@@ -46,6 +51,7 @@
                 <input type="file" id="exampleInputFile" name="img" value="{{$drinks['img']}}"></label> 
             </div>
             <div class="col-sm-10">
+
                 <button  class="btn btn-success">Отправить</button>
             </div>
             {{csrf_field()}}
