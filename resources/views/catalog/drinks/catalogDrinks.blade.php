@@ -1,24 +1,47 @@
 @extends ('layouts.app')
-    
-@section('sidebar')
 
-    <div class="col-xs-3 col-sm-pull-9">
-        <div class="sidebar">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Фильтр</div>
+@section('content')
+@include('layouts/nav')
+    
+    <div class="row row-offcanvas row-offcanvas-left">
+        
+        <div class="col-xs-10 col-sm-8">
+          <div class="row">
+
+            @for ($i = 0; $i < count($drinks); $i++)
+                <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <img src="/tmp/{{$drinks[$i]['img']}}" alt="images" width="300" height="200">
+                              <div class="caption">
+                                <h3>{{$drinks[$i]['name']}}</h3>
+                                <p>Обьем: {{$drinks[$i]['volume']}}</p>
+                                <p>Цена: {{$drinks[$i]['price']}}</p>
+                                <p>Алкогольность: {{$drinks[$i]['type_drinks']}}</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Заказать</a></p>
+                              </div>
+                            </div>
+                </div>
+            @endfor
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <div class="sidebar">
+                <h3 class="filterName">Фильтр</h3>
                 <div class="panel-body">
-                    <form action="">
+                    <form action="/catalog/catalogDrinks/">
                         <ul class="list-group">
                             <li class="list-group-item" >
                              <label>Тип напитка:</label>
                                 <div class="checkbox">
                                    
                                     <label>
-                                      <input type="checkbox" name="type_alco" value="">
+                                      <input type="checkbox" name="type_alco" value="alco">
                                       Алкогольные
                                     </label><br>
                                     <label>
-                                      <input type="checkbox" name="type_soft" value="">
+                                      <input type="checkbox" name="type_soft" value="soft">
                                       Безалкогольные
                                     </label>
                                 </div>
@@ -41,48 +64,15 @@
                                 <label>Объем:</label>
                                 <div class="checkbox">
                                     <label>Введите объем в мл
-                                      <input class="form-control" type="text" name="min_price" value="">
+                                      <input class="form-control" type="text" name="volume" value="">
                                     </label>
                                 </div>
                             </li>
 
                         </ul>
+                        <button  class="btn btn-primary filterButton">Отфильтровать</button>
                     </form>
                 </div>
-            </div>
-
-        </div>
-    </div>
-@endsection
-
-@section('content')
-@include('layouts/nav')
-    <h1 class="col-sm-12">Напитки</h1>
-    <div class="col-sm-9 col-sm-push-3">
-        <a class="btn btn-success btn-block btn-lg text-uppercase"
-           href="{{url('/admin/createDrinks')}}">Добавить напиток</a>
-        <table class="table table-striped">
-            @for ($i = 0; $i < count($drinks); $i++)
-                <tr>
-                    @foreach ($drinks[$i] as $key => $element)
-                        <td>
-                            @if ($key == 'img')
-                                <img src="/tmp/cut-{{$element}}" alt="images" >
-                                {{$element = null}}
-                            @endif
-                            {{$element}}
-                        </td>
-                    @endforeach
-                    <td>
-                        <a href="{{url('/admin/updateDrinks/'.$drinks[$i]['id'].'')}}">Редактировать запись</a>
-                    </td>
-                    <td>
-                        <a href="{{url('/admin/drinks/'.$drinks[$i]['id'].'')}}">Удалить запись</a>
-                    </td>
-
-                </tr>
-            @endfor
-        </table>
-    </div>
-    
+        </div><!--/span-->
+    </div>   
 @endsection

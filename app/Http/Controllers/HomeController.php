@@ -13,10 +13,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    //  убрал что бы мог заходить не зарегистрированный user
+   /* public function __construct()
     {// проверка, в данном случае проверяет авторизован или нет
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
