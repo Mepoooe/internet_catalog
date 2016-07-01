@@ -30,7 +30,7 @@ class ElectricsController extends Controller
             'price' => 'required|numeric',
             'status' => 'required',
             'description' => 'required',
-           // 'image' => 'required|image'
+            'image' => 'required|image'
         ]);
 
         try {
