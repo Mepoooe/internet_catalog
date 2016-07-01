@@ -6,17 +6,18 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Drinks;
 
-class HomeController extends Controller
+class CatalogDrinksController extends Controller
 {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    // доступ без авторизации
+    /*public function __construct()
     {// проверка, в данном случае проверяет авторизован или нет
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
@@ -27,6 +28,6 @@ class HomeController extends Controller
     {
         $drinks = Drinks::all()->toArray();
         $data['drinks'] = $drinks;
-        return view('home', $data);
+        return view('catalog/drinks/catalogDrinks', $data);
     }
 }

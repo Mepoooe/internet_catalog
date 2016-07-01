@@ -62,4 +62,8 @@
             @endfor
         </table>
     </div>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/misha_nik
 @endsection

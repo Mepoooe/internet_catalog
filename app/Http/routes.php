@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::auth();
 Route::get('/admin/drinks/{id?}', 'DrinksController@destroy');
-Route::get('/home', 'HomeController@index');
+Route::get('catalog', 'HomeController@index');
 Route::get('/admin', 'AdminController@index');
 
 Route::get('/admin/drinks', 'DrinksController@index');
@@ -27,6 +27,7 @@ Route::get('/admin/createDrinks', 'DrinksController@create');
 
 Route::post('/admin/drinks', 'DrinksController@store');
 Route::post('/admin/drinks/{id}', 'DrinksController@update');
+
 
 /*
  * Electrics
@@ -39,6 +40,10 @@ Route::group(['middleware' => 'auth'], function() {
     //add item to DB
     Route::post('/admin/electrics', 'ElectricsController@store');
 });
+
+//Каталог напитков
+Route::get('/catalog/drinks', 'CatalogDrinksController@index');
+
 
 //    Route::post('/admin/drinks/' ,'DrinksController@update');
 //})->where(['id'=>'[55]+']);
