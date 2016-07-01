@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function() {
     //destroy item
     Route::get('/admin/electrics/{id}', 'ElectricsController@destroy');
 
-    Route::resource('/admin/electrics', 'ElectricsController');
+    Route::get('/admin/electrics', 'ElectricsController@index');
     //add item to DB
     Route::post('/admin/electrics', 'ElectricsController@store');
 });

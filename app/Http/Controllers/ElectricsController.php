@@ -28,8 +28,15 @@ class ElectricsController extends Controller
             'price' => 'required|numeric',
             'status' => 'required',
             'description' => 'required',
+           // 'image' => 'required|image'
         ]);
+
         try {
+            //добавление
+            //$file = $request->file('image');
+            //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
+            //$file = $this->addImg($file);
+
             $electrics = new Electrics();
             $electrics->title = $request->input('title');
             $electrics->name = $request->input('name');
@@ -37,6 +44,7 @@ class ElectricsController extends Controller
             $electrics->price = $request->input('price');
             $electrics->status = $request->input('status');
             $electrics->description = $request->input('description');
+           // $electrics->img = $file->getClientOriginalName();
             $electrics->save();
         } catch(Exception $e) {
             Log::error('Ошибка записи');
@@ -58,5 +66,25 @@ class ElectricsController extends Controller
             Log::error('Ошибка удаления');
             return redirect()->back();
         }
+    }
+
+
+    //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
+    public function addImg ($file) {
+        $file->getClientOriginalName();
+        $filePath = '/tmp/$file';
+        if(is_file($filePath)){
+            unlink("$filePath");
+        }
+
+        $image = Image::make($file)
+            ->resize(100,null, function($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save('./tmp/cut-'.$file->getClientOriginalName());
+
+        $file->move('tmp', $file->getClientOriginalName());
+        $file->getClientOriginalName();
+        return $file;
     }
 }
