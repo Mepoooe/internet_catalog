@@ -30,6 +30,7 @@ Route::post('/admin/drinks/{id}', 'DrinksController@update');
 
 //Каталог напитков
 Route::get('/catalog/drinks', 'CatalogDrinksController@index');
+Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
 
 //    Route::post('/admin/drinks/' ,'DrinksController@update');
 //})->where(['id'=>'[55]+']);
