@@ -20,6 +20,7 @@ class CreateElectricsTable extends Migration
             $table->integer('price');
             $table->string('status');
             $table->longText('description');
+            $table->string('img');
             $table->timestamps();
         });
     }

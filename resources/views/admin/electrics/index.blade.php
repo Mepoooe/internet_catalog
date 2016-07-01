@@ -21,6 +21,7 @@
                     <th>Цена</th>
                     <th>Статус</th>
                     <th>Описание</th>
+                    <th>Фото</th>
                     <th>Время сознания</th>
                     <th>Время обновления</th>
                     <th></th>
@@ -101,10 +102,10 @@
                             <textarea id="description" name="description" type="text" class="form-control" required></textarea>
                         </div>
 
-                      {{--  <div class="form-group">
+                        <div class="form-group">
                             <label for="image">Картинка товара</label>
                             <input id="image" name="image" type="file" class="form-control" required>
-                        </div>--}}
+                        </div>
 
                         <input type="submit" class="btn btn-success">
                         {{csrf_field()}}

@@ -7,7 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Drinks;
 use Illuminate\Support\Facades\Log;
-use Intervention\Image\Facades\Image ;
+use Intervention\Image\Facades\Image;
 use File;
 
 class DrinksController extends Controller
