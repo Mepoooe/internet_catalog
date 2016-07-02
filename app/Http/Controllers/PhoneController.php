@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Electrics;
+use App\Phones;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,12 +11,12 @@ use Intervention\Image\Facades\Image ;
 use Illuminate\Support\Facades\File;
 
 
-class ElectricsController extends Controller
+class PhoneController extends Controller
 {
     public function index()
     {
-        $data['electrics'] = Electrics::all()->toArray();
-        return view('admin.electrics.index', $data);
+        $data['phones'] = Phones::all()->toArray();
+        return view('admin/phones/phones', $data);
     }
 
     /*
@@ -25,11 +25,10 @@ class ElectricsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:255',
-            'name' => 'required',
-            'producer' => 'required',
+            'name' => 'required|string',
+            'color' => 'required|string',
             'price' => 'required|numeric',
-            'status' => 'required',
+            'display' => 'required',
             'description' => 'required',
             'image' => 'required|image'
         ]);
@@ -40,21 +39,20 @@ class ElectricsController extends Controller
             //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
             $file = $this->addImg($file);
 
-            $electrics = new Electrics();
-            $electrics->title = $request->input('title');
-            $electrics->name = $request->input('name');
-            $electrics->producer = $request->input('producer');
-            $electrics->price = $request->input('price');
-            $electrics->status = $request->input('status');
-            $electrics->description = $request->input('description');
-            $electrics->img = $file->getClientOriginalName();
-            $electrics->save();
+            $Phones = new Phones();
+            $Phones->name = $request->input('name');
+            $Phones->color = $request->input('color');
+            $Phones->price = $request->input('price');
+            $Phones->display = $request->input('display');
+            $Phones->description = $request->input('description');
+            $Phones->img = $file->getClientOriginalName();
+            $Phones->save();
         } catch(Exception $e) {
             Log::error('Ошибка записи');
-            return redirect('/admin');
+            return redirect('/admin/');
         }
 
-        return redirect('/admin/electrics');
+        return redirect('/admin/phones');
     }
 
     /*
@@ -63,7 +61,7 @@ class ElectricsController extends Controller
     public function destroy($id = null)
     {
         try {
-            $el = Electrics::where('id', '=', $id)->find($id);
+            $el = Phones::where('id', '=', $id)->find($id);
             $imgName = $el->img;
 
             $filePath = "./tmp/" .$imgName;
@@ -73,9 +71,9 @@ class ElectricsController extends Controller
                 File::delete("./tmp/" .$imgName);
             }
 
-            Electrics::destroy($id);
+            Phones::destroy($id);
 
-            return redirect('/admin/electrics');
+            return redirect('/admin/phones');
         } catch(Exception $e) {
             Log::error('Ошибка удаления');
             return redirect()->back();

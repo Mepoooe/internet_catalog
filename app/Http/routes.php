@@ -41,6 +41,16 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/admin/electrics', 'ElectricsController@store');
 });
 
+// Phones
+Route::group(['middleware' => 'auth'], function() {
+    //destroy item
+    Route::get('/admin/phones/{id}', 'PhoneController@destroy');
+
+    Route::get('admin/phones', 'PhoneController@index');
+    //add item to DB
+    Route::post('/admin/phones', 'PhoneController@store');
+});
+
 //Каталог напитков
 Route::get('/catalog/drinks', 'CatalogDrinksController@index');
 Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');

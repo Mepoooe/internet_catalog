@@ -18,7 +18,7 @@
                             <a href="{{ url('/admin/electrics') }}">Електротовары</a>
                         </li>
                         <li class="list-group-item" >
-                            <a href="{{ url('#') }}">Тест</a>
+                            <a href="{{ url('admin/phones') }}">Телефоны</a>
                         </li>
                         <li class="list-group-item" >
                             <a href="{{ url('#') }}">Тест</a>

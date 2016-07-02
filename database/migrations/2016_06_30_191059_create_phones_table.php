@@ -18,6 +18,7 @@ class CreatePhonesTable extends Migration
             $table->string('color');
             $table->integer('price');
             $table->string('display');
+            $table->string('description');
             $table->string('img');
             $table->timestamps();
         });
