@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Drinks;
+use App\Phones;
 use Mail;
-class CatalogDrinksController extends Controller
+
+class CatalogPhonesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,61 +28,56 @@ class CatalogDrinksController extends Controller
     // вывод данных с пагинацией 
     public function index()
     {
-        $drinks = Drinks::paginate(2);
-        $data['drinks'] = $drinks;
-        return view('catalog/drinks/catalogDrinks', $data);
+        $phones = Phones::paginate(2);
+        $data['phones'] = $phones;
+        return view('catalog/phones/catalogPhones', $data);
     }
     // фильтр данных
     public function filter(Request $request, $id=null)
     {
         $this->validate($request, [
-            'type_alco' => 'string',
-            'type_soft' => 'string',
+            'color' => 'string',
+            'display' => 'string',
             'min_price' => 'numeric',
-            'max_price'   => 'numeric',
-            'volume' => 'numeric'
+            'max_price'   => 'numeric'
         ]);
         $filterValue = array();
-        $filterValue['type_alco'] = $request->input('type_alco');
-        $filterValue['type_soft']  = $request->input('type_soft');
+        $filterValue['color'] = $request->input('color');
+        $filterValue['display']  = $request->input('display');
         $filterValue['min_price']  = $request->input('min_price');
         $filterValue['max_price']  = $request->input('max_price');
-        $filterValue['volume']  = $request->input('volume');
 
         
         
         if ($filterValue['max_price'] != '') {
-            $drinks = Drinks::where('price', '<=', $filterValue['max_price'])
+            $phones = Phones::where('price', '<=', $filterValue['max_price'])
                                 ->where('price', '>=', $filterValue['min_price'])
                                 ->paginate();
         } else {
-            $drinks = Drinks::where('price', '>=', $filterValue['min_price'])->paginate();
+            $phones = Phones::where('price', '>=', $filterValue['min_price'])->paginate();
         }
-        if ($filterValue['type_alco'] != '' && $filterValue['type_soft'] == '') {
-         $drinks = Drinks::where('type_drinks', '=', $filterValue['type_alco'])
+        if ($filterValue['display'] != '') {
+         $phones = Phones::where('display', '=', $filterValue['display'])
                           ->paginate();
         }
-        if ($filterValue['type_soft'] != '' && $filterValue['type_alco'] == '') {
-         $drinks = Drinks::where('type_drinks', '=', $filterValue['type_soft'])
+        if ($filterValue['color'] != '' ) {
+         $phones = Phones::where('color', '=', $filterValue['color'])
                           ->paginate();
         }
-        if ($filterValue['volume'] != '') {
-            $drinks = Drinks::where('volume', '=', $filterValue['volume'])->paginate();
-        }
-        $data['drinks'] = $drinks;
+        $data['phones'] = $phones;
         $data['arr'] = $filterValue;
         
-        return view('catalog/drinks/catalogDrinks', $data);
+        return view('catalog/phones/catalogPhones', $data);
     }
 
     // отправка почты
     public function sendOrder($id = null)
     {
-      Mail::send('/catalog/drinks/mail', array('name' => 'Misha'), function($message)
+      Mail::send('/catalog/phones/mail', array('name' => 'Misha'), function($message)
         {
           $message->to('misha.nikula@yandex.ru', 'Джон Смит')->from('cj27111992@gmail.com')->subject('Привет!');
         });
 
-      return redirect('/catalog/drinks');
+      return redirect('/catalog/phones');
     }
 }

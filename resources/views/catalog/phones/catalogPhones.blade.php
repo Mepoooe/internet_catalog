@@ -1,23 +1,24 @@
 @extends ('layouts.app')
 
 @section('content')
-@include('layouts/nav')
+  @include('layouts/nav')
     
     <div class="row row-offcanvas row-offcanvas-left">
         
         <div class="col-xs-10 col-sm-8">
           <div class="row">
 
-            @for ($i = 0; $i < count($drinks); $i++)
+            @for ($i = 0; $i < count($phones); $i++)
                 <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
-                                <img src="/tmp/{{$drinks[$i]['img']}}" alt="images" width="300" height="200">
+                                <img src="/tmp/{{$phones[$i]['img']}}" alt="images" width="300" height="200">
                               <div class="caption">
-                                <h3>{{$drinks[$i]['name']}}</h3>
-                                <p>Обьем: {{$drinks[$i]['volume']}}</p>
-                                <p>Цена: {{$drinks[$i]['price']}}</p>
-                                <p>Алкогольность: {{$drinks[$i]['type_drinks']}}</p>
-                                <p><a href="/catalog/catalogDrinks/send/{{$drinks[$i]['id']}}" class="btn btn-primary" role="button">Заказать</a></p>
+                                <h3>{{$phones[$i]['name']}}</h3>
+                                <p>Цвет: {{$phones[$i]['color']}}</p>
+                                <p>Цена: {{$phones[$i]['price']}}</p>
+                                <p>Дисплей: {{$phones[$i]['display']}}</p>
+                                <p>Описание: {{$phones[$i]['description']}}</p>
+                                <p><a href="/catalog/catalogDrinks/send/{{$phones[$i]['id']}}" class="btn btn-primary" role="button">Заказать</a></p>
                               </div>
                             </div>
                 </div>
@@ -30,20 +31,18 @@
             <div class="sidebar">
                 <h3 class="filterName">Фильтр</h3>
                 <div class="panel-body">
-                    <form action="/catalog/catalogDrinks/">
+                    <form action="/catalog/catalogPhones/">
                         <ul class="list-group">
                             <li class="list-group-item" >
-                             <label>Тип напитка:</label>
+                             <label>Цвет:</label>
                                 <div class="checkbox">
-                                   
-                                    <label>
-                                      <input type="checkbox" name="type_alco" value="alco">
-                                      Алкогольные
-                                    </label><br>
-                                    <label>
-                                      <input type="checkbox" name="type_soft" value="soft">
-                                      Безалкогольные
-                                    </label>
+                                    <select name="color" class="form-control" id="display">
+                                      <option value=""></option>
+                                      <option value="black">Черный</option>
+                                      <option value="red">Красный</option>
+                                      <option value="yellow">Желтый</option>
+                                      <option value="grey">Серый</option>
+                                    </select>
                                 </div>
                             </li>
                             <li class="list-group-item" >
@@ -61,11 +60,14 @@
                                 </div>
                             </li>
                             <li class="list-group-item" >
-                                <label>Объем:</label>
-                                <div class="checkbox">
-                                    <label>Введите объем в мл
-                                      <input class="form-control" type="text" name="volume" value="">
-                                    </label>
+                                <label>Дисплей:</label>
+                                <div>
+                                    <select name="display" class="form-control" id="display">
+                                      <option value=""></option>
+                                      <option value="6">6</option>
+                                      <option value="5">5</option>
+                                      <option value="4">4</option>
+                                    </select>
                                 </div>
                             </li>
 
@@ -75,10 +77,10 @@
                 </div>
         </div><!--/span-->
     
-        <?php 
+        <?php
         if(!function_exists('render')){
-             echo $drinks->render(); 
-         }
+             echo $phones->render();
+            }
         ?>
-    </div>   
+    </div>
 @endsection

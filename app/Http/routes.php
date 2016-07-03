@@ -45,17 +45,27 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'auth'], function() {
     //destroy item
     Route::get('/admin/phones/{id}', 'PhoneController@destroy');
-
+    // Index page
     Route::get('admin/phones', 'PhoneController@index');
     //add item to DB
     Route::post('/admin/phones', 'PhoneController@store');
+    //update item 
+    Route::get('/admin/updatePhones/{id}', 'PhoneController@edit');
+    Route::post('/admin/phones/{id?}', 'PhoneController@update');
 });
 
-//Каталог напитков
-Route::get('/catalog/drinks', 'CatalogDrinksController@index');
-Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
-
-
+//Route::group(['middleware' => 'auth'], function() {
+    //Каталог напитков
+    Route::get('/catalog/drinks', 'CatalogDrinksController@index');
+    // фильтр 
+    Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
+    // Заказ
+    Route::get('/catalog/catalogDrinks/send/{id?}', 'CatalogDrinksController@sendOrder');
+//});
+// Каталог phones
+    Route::get('/catalog/phones', 'CatalogPhonesController@index');
+// фильтр 
+    Route::get('/catalog/catalogPhones/{id?}', 'CatalogPhonesController@filter');
 //    Route::post('/admin/drinks/' ,'DrinksController@update');
 //})->where(['id'=>'[55]+']);
 //Route::get('/goods', 'GoodsController@index');
