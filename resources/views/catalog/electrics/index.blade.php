@@ -31,39 +31,58 @@
                 <div class="sidebar">
                     <h3 class="filterName">Фильтр</h3>
                     <div class="panel-body">
-                        <form action="/catalog/electrics">
+                        <form action="/catalog/electrics/index/" method="get">
                             <ul class="list-group">
                                 <li class="list-group-item" >
                                     <label for="producer">Производитель: </label><br>
                                     <select name="producer" id="producer">
+                                        <option value="все">все</option>
                                         @for($i = 0; count($electrics) > $i; $i++)
                                             <option value="{{$electrics[$i]['producer']}}">
                                                 {{$electrics[$i]['producer']}}
                                             </option>
                                         @endfor
+
                                     </select>
                                 </li>
                                 <li class="list-group-item" >
                                     <label for="name">Марка: </label><br>
                                     <select name="name" id="name">
+                                        <option value="все">все</option>
                                         @for($i = 0; count($electrics) > $i; $i++)
                                             <option value="{{$electrics[$i]['name']}}">
                                                 {{$electrics[$i]['name']}}
                                             </option>
                                         @endfor
+
                                     </select>
                                 </li>
                                 <li class="list-group-item" >
                                     <label>Цена:</label>
                                     <label>От
-                                        <input class="form-control" type="number" name="min_price" value="">
+                                        <input class="form-control"
+                                               type="number"
+                                               name="min_price"
+                                               value="<?php if(isset($_GET['min_price'])) {
+                                                   echo $_GET['min_price'];
+                                                 }
+                                               ?>"
+                                               placeholder="минимальная цена">
                                     </label><br>
                                     <label>До
-                                        <input class="form-control" type="number" name="max_price" value="">
+                                        <input class="form-control"
+                                               type="number"
+                                               name="max_price"
+                                               value="<?php if(isset($_GET['max_price'])) {
+                                                   echo $_GET['max_price'];
+                                                 }
+                                               ?>" 
+                                               placeholder="максимальная цена">
                                     </label>
                                 </li>
                             </ul>
-                            <button  class="btn btn-primary filterButton">Отфильтровать</button>
+                            <button  class="btn btn-success ">Отфильтровать</button>
+                            <button  class="btn btn-danger resetButton">Сбросить</button>
                         </form>
                     </div>
                 </div>

@@ -62,7 +62,7 @@ Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
 
 //Каталог электротоваров
 Route::get('/catalog/electrics', 'ElectricsController@catalog');
-//Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
+Route::get('/catalog/electrics/{id?}', 'ElectricsController@filter');
 
 
 //    Route::post('/admin/drinks/' ,'DrinksController@update');
