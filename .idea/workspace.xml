@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9db942b9-8cc9-4a1a-b897-cc5bda7c0fa0" name="Default" comment="Добавлены Учебники">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Books.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/BooksController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_07_02_090707_create_books_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/books/index.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/catalog/books/catalogBooks.blade.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.env.example" afterPath="" />
+    <list default="true" id="9db942b9-8cc9-4a1a-b897-cc5bda7c0fa0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/CatalogBooksController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/admin.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/admin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/sidebar_admin.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/sidebar_admin.blade.php" />
     </list>
     <ignored path="catalog.loc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,59 +30,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BooksController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="128" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-              <folding>
-                <element signature="e#41#63#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalogBooks.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/catalog/books/catalogBooks.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
-              <folding>
-                <marker date="1467535562811" expanded="true" signature="1867:1937" placeholder="..." />
-                <marker date="1467535562811" expanded="true" signature="2083:2154" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CatalogBooksController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CatalogBooksController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CatalogBooksController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+            <state relative-caret-position="396">
+              <caret line="51" column="7" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
               <folding>
                 <element signature="e#40#53#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/books/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -135,11 +81,11 @@
         <option value="$PROJECT_DIR$/database/migrations/2016_07_02_094707_create_books_table.php" />
         <option value="$PROJECT_DIR$/resources/views/mail/order.php" />
         <option value="$PROJECT_DIR$/resources/views/catalog/books/catalogBooks.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CatalogBooksController.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BooksController.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/books/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CatalogBooksController.php" />
       </list>
     </option>
   </component>
@@ -548,12 +494,20 @@
       <option name="presentableId" value="Default" />
       <updated>1467024595586</updated>
       <workItem from="1467451932812" duration="15484000" />
-      <workItem from="1467534659111" duration="2508000" />
+      <workItem from="1467534659111" duration="3834000" />
     </task>
+    <task id="LOCAL-00001" summary="Добавлены Учебники">
+      <created>1467537238550</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1467537238550</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17992000" />
+    <option name="totallyTimeSpent" value="19318000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
@@ -925,6 +879,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -943,50 +898,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/catalog/books/catalogBooks.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
-          <folding>
-            <marker date="1467535562811" expanded="true" signature="1867:1937" placeholder="..." />
-            <marker date="1467535562811" expanded="true" signature="2083:2154" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="128" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding>
-            <element signature="e#41#63#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/mail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="111" column="2" selection-start-line="111" selection-start-column="2" selection-end-line="111" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CatalogBooksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="e#40#53#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1003,6 +919,45 @@
         <state relative-caret-position="85">
           <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/catalog/books/catalogBooks.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+          <folding>
+            <marker date="1467535562811" expanded="true" signature="1867:1937" placeholder="..." />
+            <marker date="1467535562811" expanded="true" signature="2083:2154" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="128" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding>
+            <element signature="e#41#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CatalogBooksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="51" column="7" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
