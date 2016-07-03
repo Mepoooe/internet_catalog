@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1 class="col-sm-12">Електротовары</h1>
+    <h1 class="col-sm-12">Телефоны</h1>
     <div class="col-sm-9 col-sm-push-3">
         <a class="btn btn-success btn-block btn-lg text-uppercase" data-toggle="modal" data-target="#add"
            href="#">
