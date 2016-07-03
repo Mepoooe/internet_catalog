@@ -135,13 +135,23 @@ class ElectricsController extends Controller
         }
     }
 
+    /*
+     * Front methods
+     */
     public function catalog()
     {
         $data['electrics'] = Electrics::all()->toArray();
         return view('/catalog/electrics/index', $data);
     }
 
+    public function catalogFilter()
+    {
 
+    }
+
+    /*
+     * Functions
+     */
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
     public function addImg ($file) {
         $fileName = $file->getClientOriginalName();

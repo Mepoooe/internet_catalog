@@ -43,7 +43,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    <img class="main-logo" src="{{ asset('img/logo.png') }}" alt="team-logo">
                 </a>
             </div>
 

@@ -2,7 +2,6 @@
 
 @section('content')
     @include('layouts.nav')
-
     <div class="row row-offcanvas row-offcanvas-left">
 
         <div class="col-xs-10 col-sm-8">
@@ -27,48 +26,41 @@
             </div>
         </div>
 
-{{--        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="list-group">
                 <div class="sidebar">
                     <h3 class="filterName">Фильтр</h3>
                     <div class="panel-body">
-                        <form action="#">
+                        <form action="/catalog/electrics">
                             <ul class="list-group">
                                 <li class="list-group-item" >
-                                    <label>Тип напитка:</label>
-                                    <div class="checkbox">
-
-                                        <label>
-                                            <input type="checkbox" name="type_alco" value="alco">
-                                            Алкогольные
-                                        </label><br>
-                                        <label>
-                                            <input type="checkbox" name="type_soft" value="soft">
-                                            Безалкогольные
-                                        </label>
-                                    </div>
+                                    <label for="producer">Производитель: </label><br>
+                                    <select name="producer" id="producer">
+                                        @for($i = 0; count($electrics) > $i; $i++)
+                                            <option value="{{$electrics[$i]['producer']}}">
+                                                {{$electrics[$i]['producer']}}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                </li>
+                                <li class="list-group-item" >
+                                    <label for="name">Марка: </label><br>
+                                    <select name="name" id="name">
+                                        @for($i = 0; count($electrics) > $i; $i++)
+                                            <option value="{{$electrics[$i]['name']}}">
+                                                {{$electrics[$i]['name']}}
+                                            </option>
+                                        @endfor
+                                    </select>
                                 </li>
                                 <li class="list-group-item" >
                                     <label>Цена:</label>
-                                    <div class="checkbox">
-
-                                        <label>Минимальная цена
-                                            <input class="form-control" type="text" name="min_price" value="">
-
-                                        </label><br>
-                                        <label>Максимальная цена
-                                            <input class="form-control" type="text" name="max_price" value="">
-
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item" >
-                                    <label>Объем:</label>
-                                    <div class="checkbox">
-                                        <label>Введите объем в мл
-                                            <input class="form-control" type="text" name="volume" value="">
-                                        </label>
-                                    </div>
+                                    <label>От
+                                        <input class="form-control" type="number" name="min_price" value="">
+                                    </label><br>
+                                    <label>До
+                                        <input class="form-control" type="number" name="max_price" value="">
+                                    </label>
                                 </li>
                             </ul>
                             <button  class="btn btn-primary filterButton">Отфильтровать</button>
@@ -77,5 +69,5 @@
                 </div>
             </div>
         </div>
-    </div>--}}
+    </div>
 @stop
