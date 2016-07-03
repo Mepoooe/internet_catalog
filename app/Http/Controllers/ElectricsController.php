@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Mockery\CountValidator\Exception;
-use Intervention\Image\Facades\Image ;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 
 
@@ -63,7 +63,7 @@ class ElectricsController extends Controller
     public function destroy($id = null)
     {
         try {
-            $el = Electrics::where('id', '=', $id)->find($id);
+            $el = Electrics::where('id', $id)->find($id);
             $imgName = $el->img;
 
             $filePath = "./tmp/" .$imgName;
@@ -78,6 +78,59 @@ class ElectricsController extends Controller
             return redirect('/admin/electrics');
         } catch(Exception $e) {
             Log::error('Ошибка удаления');
+            return redirect()->back();
+        }
+    }
+    /*
+     * Редактирование записи
+     */
+    public function edit($id = null)
+    {
+        try {
+            $data['electrics'] = Electrics::find($id);;
+            $data['id'] = $id;
+            return view('/admin/electrics/edit', $data);
+        } catch(Exception $e) {
+            Log::error('Ошибка ');
+            return redirect()->back();
+        }
+    }
+
+    public function update(Request $request, $id = null)
+    {
+        $this->validate($request, [
+            'title' => 'max:255',
+            'price' => 'numeric',
+            'image' => 'required|image'
+        ]);
+
+        try {
+            $el = Electrics::where('id', $id)->find($id);
+            $imgName = $el->img;
+
+            $filePath = "./tmp/" .$imgName;
+
+            if(is_file($filePath)){
+                File::delete("./tmp/cut-" .$imgName);
+                File::delete("./tmp/" .$imgName);
+            }
+            $el = Electrics::find($id);
+
+            $post = $request->toArray();
+            $file = $this->addImg($post['image']);
+
+            $el->title = $request->input('title');
+            $el->name = $request->input('name');
+            $el->producer = $request->input('producer');
+            $el->price = $request->input('price');
+            $el->status = $request->input('status');
+            $el->description = $request->input('description');
+            $el->img = $file->getClientOriginalName();
+            $el->save();
+
+            return redirect('/admin/electrics');
+        } catch(Exception $e) {
+            Log::error('Ошибка редактирования');
             return redirect()->back();
         }
     }

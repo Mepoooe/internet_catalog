@@ -39,11 +39,13 @@
                             </td>
                         @endforeach
                         <td>
-                            <a class="btn btn-warning" href="{{url('/admin/electrics/'.$electrics[$i]['id'].'')}}" title="Редактировать запись">
+                            <a class="btn btn-warning"
+                               href="{{url('/admin/electrics/edit/'.$electrics[$i]['id'].'')}}" title="Редактировать запись">
                                 <i class="fa fa-edit"></i></a>
                         </td>
                         <td>
-                            <a class="btn btn-danger" href="{{url('/admin/electrics/'.$electrics[$i]['id'].'')}}" title="Удалить запись">
+                            <a class="btn btn-danger"
+                               href="{{url('/admin/electrics/'.$electrics[$i]['id'].'')}}" title="Удалить запись">
                                 <i class="fa fa-trash-o"></i></a>
                         </td>
 
