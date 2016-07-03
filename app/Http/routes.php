@@ -35,10 +35,15 @@ Route::post('/admin/drinks/{id}', 'DrinksController@update');
 Route::group(['middleware' => 'auth'], function() {
     //destroy item
     Route::get('/admin/electrics/{id}', 'ElectricsController@destroy');
-
+    //default
     Route::get('/admin/electrics', 'ElectricsController@index');
+    //edit
+    Route::get('/admin/electrics/edit/{id}', 'ElectricsController@edit');
+    //update
+    Route::post('/admin/electrics/{id}', 'ElectricsController@update');
     //add item to DB
     Route::post('/admin/electrics', 'ElectricsController@store');
+
 });
 
 // Phones
