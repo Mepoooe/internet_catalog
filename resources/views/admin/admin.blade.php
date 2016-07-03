@@ -21,6 +21,9 @@
                             <a href="{{ url('admin/phones') }}">Телефоны</a>
                         </li>
                         <li class="list-group-item" >
+                            <a href="{{ url('admin/books') }}">Учебники</a>
+                        </li>
+                        <li class="list-group-item" >
                             <a href="{{ url('#') }}">Тест</a>
                         </li>
 

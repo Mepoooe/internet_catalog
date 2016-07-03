@@ -55,6 +55,17 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('/catalog/drinks', 'CatalogDrinksController@index');
 Route::get('/catalog/catalogDrinks/{id?}', 'CatalogDrinksController@filter');
 
+//Books
+Route::get('/admin/books', 'BooksController@index');
+
+Route::get('/admin/updateBooks/{id?}', 'BooksController@edit');
+Route::get('/admin/createBooks', 'BooksController@create');
+
+Route::post('/admin/books', 'BooksController@store');
+Route::post('/admin/books/{id}', 'BooksController@update');
+
+Route::get('/catalog/books', 'CatalogBooksController@index');
+Route::get('/catalog/catalogBooks/{id?}', 'CatalogBooksController@filter');
 
 //    Route::post('/admin/drinks/' ,'DrinksController@update');
 //})->where(['id'=>'[55]+']);
