@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/admin/phones/{id?}', 'PhoneController@update');
 });
 
+
 //Route::group(['middleware' => 'auth'], function() {
     //Каталог напитков
     Route::get('/catalog/drinks', 'CatalogDrinksController@index');
@@ -67,10 +68,17 @@ Route::group(['middleware' => 'auth'], function() {
     // Заказ
     Route::get('/catalog/catalogDrinks/send/{id?}', 'CatalogDrinksController@sendOrder');
 //});
+
 // Каталог phones
     Route::get('/catalog/phones', 'CatalogPhonesController@index');
 // фильтр 
     Route::get('/catalog/catalogPhones/{id?}', 'CatalogPhonesController@filter');
+
+//Каталог электротоваров
+Route::get('/catalog/electrics', 'ElectricsController@catalog');
+Route::get('/catalog/electrics/{id?}', 'ElectricsController@filter');
+
+
 //    Route::post('/admin/drinks/' ,'DrinksController@update');
 //})->where(['id'=>'[55]+']);
 //Route::get('/goods', 'GoodsController@index');

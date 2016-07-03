@@ -12,14 +12,27 @@
                 class="active"
               @endif
                 ><a href="/catalog/drinks">Напитки</a></li>
-                <li><a href="#">Электротовары</a></li>
+                
                 <li
-                @if ($_SERVER['REQUEST_URI'] == '/catalog/phones')
+              @if ($_SERVER['REQUEST_URI'] == '/catalog/electrics')
+                class="active"
+              @endif
+                ><a href="/catalog/electrics">Электротовары</a></li>
+                
+                <li
+              @if ($_SERVER['REQUEST_URI'] == '/catalog/phones')
                 class="active"
               @endif
               ><a href="/catalog/phones">Телефоны</a></li>
-                <li><a href="#">тест</a></li>
+                
+                <li
+              @if ($_SERVER['REQUEST_URI'] == '/catalog/books')
+                class="active"
+              @endif
+              ><a href="/catalog/books">Учебники</a></li>
+                
                 <li><a href="#">О нас</a></li>
               </ul>
             </nav>
      </div>
+     <br>

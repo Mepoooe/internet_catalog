@@ -25,13 +25,13 @@ class ElectricsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:255',
-            'name' => 'required',
-            'producer' => 'required',
-            'price' => 'required|numeric',
-            'status' => 'required',
+            'title'       => 'required|max:255',
+            'name'        => 'required',
+            'producer'    => 'required',
+            'price'       => 'required|numeric',
+            'status'      => 'required',
             'description' => 'required',
-            'image' => 'required|image'
+            'image'       => 'required|image'
         ]);
 
         try {
@@ -41,13 +41,13 @@ class ElectricsController extends Controller
             $file = $this->addImg($file);
 
             $electrics = new Electrics();
-            $electrics->title = $request->input('title');
-            $electrics->name = $request->input('name');
-            $electrics->producer = $request->input('producer');
-            $electrics->price = $request->input('price');
-            $electrics->status = $request->input('status');
+            $electrics->title       = $request->input('title');
+            $electrics->name        = $request->input('name');
+            $electrics->producer    = $request->input('producer');
+            $electrics->price       = $request->input('price');
+            $electrics->status      = $request->input('status');
             $electrics->description = $request->input('description');
-            $electrics->img = $file->getClientOriginalName();
+            $electrics->img         = $file->getClientOriginalName();
             $electrics->save();
         } catch(Exception $e) {
             Log::error('Ошибка записи');
@@ -119,13 +119,13 @@ class ElectricsController extends Controller
             $post = $request->toArray();
             $file = $this->addImg($post['image']);
 
-            $el->title = $request->input('title');
-            $el->name = $request->input('name');
-            $el->producer = $request->input('producer');
-            $el->price = $request->input('price');
-            $el->status = $request->input('status');
+            $el->title       = $request->input('title');
+            $el->name        = $request->input('name');
+            $el->producer    = $request->input('producer');
+            $el->price       = $request->input('price');
+            $el->status      = $request->input('status');
             $el->description = $request->input('description');
-            $el->img = $file->getClientOriginalName();
+            $el->img         = $file->getClientOriginalName();
             $el->save();
 
             return redirect('/admin/electrics');
@@ -135,7 +135,55 @@ class ElectricsController extends Controller
         }
     }
 
+    /*
+     * Front methods
+     */
+    public function catalog()
+    {
+        $data['electrics'] = Electrics::all()->toArray();
+        return view('/catalog/electrics/index', $data);
+    }
 
+    public function filter(Request $request, $id = null)
+    {
+        $this->validate($request, [
+            'min_price' => 'numeric',
+            'max_price' => 'numeric'
+        ]);
+
+        $filterValue = array();
+        $filterValue['producer']   = $request->input('producer');
+        $filterValue['name']       = $request->input('name');
+        $filterValue['min_price']  = $request->input('min_price');
+        $filterValue['max_price']  = $request->input('max_price');
+
+//        dd($filterValue['producer']);
+
+        if ($filterValue['max_price'] != '') {
+            $electrics = Electrics::where('price', '<=', $filterValue['max_price'])
+                ->where('price', '>=', $filterValue['min_price'])
+                ->get();
+        } else {
+            $electrics = Electrics::where('price', '>=', $filterValue['min_price'])->get();
+        }
+        if($filterValue['producer'] != 'все') {
+            $electrics = Electrics::where('producer', '=', $filterValue['producer'])->get();
+        }
+        /*if($filterValue['name']) {
+            $electrics = Electrics::where('name', '=', $filterValue['name'])->get();
+        }*/
+
+        $data['electrics'] = $electrics;
+        $data['arr'] = $filterValue;
+        //dd($data['arr']);
+
+
+        return view('catalog/electrics/index', $data);
+    }
+
+    /*
+     * Functions
+     */
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
     public function addImg ($file) {
         $fileName = $file->getClientOriginalName();
