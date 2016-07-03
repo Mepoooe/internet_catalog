@@ -135,6 +135,12 @@ class ElectricsController extends Controller
         }
     }
 
+    public function catalog()
+    {
+        $data['electrics'] = Electrics::all()->toArray();
+        return view('/catalog/electrics/index', $data);
+    }
+
 
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
     public function addImg ($file) {

@@ -1,4 +1,5 @@
 .idea
+.idea/workspase.xml
 /vendor
 /node_modules
 /public/storage
