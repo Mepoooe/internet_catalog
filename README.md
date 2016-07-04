@@ -1,7 +1,7 @@
 <h1>Internet catalog</h1>
 
 <h2>Installation</h2>
-Follow the steps:
+<h3>Follow the steps:</h3>
 
 <br>Clone the project repository:
 <br>`$ git clone https://github.com/misha162008/internet_catalog.git`
