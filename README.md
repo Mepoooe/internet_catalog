@@ -5,8 +5,8 @@ Follow the steps:
 
 <br>Clone the project repository:
 <br>`$ git clone https://github.com/misha162008/internet_catalog.git`
-<br>Go to src/ directory:
-<br>`$ cd online-shop/src`
+<br>Go to directory:
+<br>`$ cd internet_catalog`
 <br>Install dependencies:
 <br>`$ composer install`
 <br>At end, rename .env.example file in .env and configure it
