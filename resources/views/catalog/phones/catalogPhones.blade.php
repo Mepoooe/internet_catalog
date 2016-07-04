@@ -18,7 +18,7 @@
                                 <p>Цена: {{$phones[$i]['price']}}</p>
                                 <p>Дисплей: {{$phones[$i]['display']}}</p>
                                 <p>Описание: {{$phones[$i]['description']}}</p>
-                                <p><a href="/catalog/catalogDrinks/send/{{$phones[$i]['id']}}" class="btn btn-primary" role="button">Заказать</a></p>
+                                <p><a href="/catalog/phones/order/{{$phones[$i]['id']}}" class="btn btn-primary" role="button">Заказать</a></p>
                               </div>
                             </div>
                 </div>

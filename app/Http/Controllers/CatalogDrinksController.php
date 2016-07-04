@@ -74,12 +74,36 @@ class CatalogDrinksController extends Controller
         return view('catalog/drinks/catalogDrinks', $data);
     }
 
-    // отправка почты
-    public function sendOrder($id = null)
+    // Оформление заказа
+    public function order($id = null)
     {
-      Mail::send('/catalog/drinks/mail', array('name' => 'Misha'), function($message)
+      $drinks = Drinks::find($id);
+      $drinksArr['drinksName'] = $drinks->name;
+      $drinksArr['drinksPrice'] = $drinks->price;
+      $drinksArr['drinksImg'] = $drinks->img;
+
+      $data['drinks'] = $drinksArr;
+      $data['id'] = $id;
+
+      return view('/catalog/drinks/order', $data);
+    }
+
+    // отправка почты
+    public function sendOrder(Request $request, $id = null)
+    {
+      $this->validate($request, [
+            'name' => 'string',
+            'email' => 'required|email',
+            'phone' => 'required|numeric'
+        ]);
+        $orderValue = array();
+        $orderValue['name'] = $request->input('name');
+        $orderValue['email'] = $request->input('email');
+        $orderValue['phone'] = $request->input('phone');
+
+      Mail::send('/catalog/drinks/mail', $orderValue, function($message) use ($orderValue)
         {
-          $message->to('misha.nikula@yandex.ru', 'Джон Смит')->from('cj27111992@gmail.com')->subject('Привет!');
+          $message->to($orderValue['email'], 'Джон Смит')->from('cj27111992@gmail.com')->subject('Привет!');
         });
 
       return redirect('/catalog/drinks');

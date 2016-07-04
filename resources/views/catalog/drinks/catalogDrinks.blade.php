@@ -17,7 +17,7 @@
                                 <p>Обьем: {{$drinks[$i]['volume']}}</p>
                                 <p>Цена: {{$drinks[$i]['price']}}</p>
                                 <p>Алкогольность: {{$drinks[$i]['type_drinks']}}</p>
-                                <p><a href="/catalog/catalogDrinks/send/{{$drinks[$i]['id']}}" class="btn btn-primary" role="button">Заказать</a></p>
+                                <p><a href="/catalog/drinks/order/{{$drinks[$i]['id']}}" class="btn btn-primary" role="button">Заказать</a></p>
                               </div>
                             </div>
                         </div>

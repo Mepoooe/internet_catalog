@@ -47,8 +47,7 @@ class CatalogPhonesController extends Controller
         $filterValue['min_price']  = $request->input('min_price');
         $filterValue['max_price']  = $request->input('max_price');
 
-        
-        
+
         if ($filterValue['max_price'] != '') {
             $phones = Phones::where('price', '<=', $filterValue['max_price'])
                                 ->where('price', '>=', $filterValue['min_price'])
@@ -70,12 +69,36 @@ class CatalogPhonesController extends Controller
         return view('catalog/phones/catalogPhones', $data);
     }
 
-    // отправка почты
-    public function sendOrder($id = null)
+    // Оформление заказа
+    public function order($id = null)
     {
-      Mail::send('/catalog/phones/mail', array('name' => 'Misha'), function($message)
+      $phones = Phones::find($id);
+      $phoneArr['phonesName'] = $phones->name;
+      $phoneArr['phonesPrice'] = $phones->price;
+      $phoneArr['phonesImg'] = $phones->img;
+
+      $data['phones'] = $phoneArr;
+      $data['id'] = $id;
+
+      return view('/catalog/phones/order', $data);
+    }
+
+    // отправка почты
+    public function sendOrder(Request $request, $id = null)
+    {
+      $this->validate($request, [
+            'name' => 'string',
+            'email' => 'required|email',
+            'phone' => 'required|numeric'
+        ]);
+        $orderValue = array();
+        $orderValue['name'] = $request->input('name');
+        $orderValue['email'] = $request->input('email');
+        $orderValue['phone'] = $request->input('phone');
+
+      Mail::send('/catalog/phones/mail', $orderValue, function($message) use ($orderValue)
         {
-          $message->to('misha.nikula@yandex.ru', 'Джон Смит')->from('cj27111992@gmail.com')->subject('Привет!');
+          $message->to($orderValue['email'], 'Джон Смит')->from('cj27111992@gmail.com')->subject('Привет!');
         });
 
       return redirect('/catalog/phones');

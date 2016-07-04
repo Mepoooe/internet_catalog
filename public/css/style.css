@@ -8,3 +8,18 @@
     height: 25px;
     width: auto;
 }
+.phoneNameOrder{
+    margin-top: 15px;
+}
+.summaOrder{
+    font-size: 18px;
+    color: #14D;
+}
+.orderButton{
+    float: right;
+    padding: 10px;
+}
+.orderHeader{
+    text-align: center;
+    padding-bottom: 25px;
+}
