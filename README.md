@@ -31,6 +31,7 @@
 <ul>
     <li>HTML 
     <li>CSS 
+    <li>LARAVEL
     <li>BLADE
     <li>BOOTSTRAP
     <li>PHP
