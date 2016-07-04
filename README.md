@@ -1,15 +1,15 @@
 <h1>Internet catalog</h1>
 
 <h2>Installation</h2>
-Follow the steps:
+<h3>Follow the steps:</h3>
 
-Clone the project repository:
-`$ git clone https://github.com/misha162008/internet_catalog.git`
-Go to src/ directory:
-`$ cd online-shop/src`
-Install dependencies:
-`$ composer install`
-At end, rename .env.example file in .env and configure it
+<br>Clone the project repository:
+<br>`$ git clone https://github.com/misha162008/internet_catalog.git`
+<br>Go to directory:
+<br>`$ cd internet_catalog`
+<br>Install dependencies:
+<br>`$ composer install`
+<br>At end, rename .env.example file in .env and configure it
 
 
 
@@ -23,7 +23,7 @@ At end, rename .env.example file in .env and configure it
 <h3>Catalog</h3>
 <img src="" alt="catalog">
 <h3>Admin panel</h3>
-<img src="http://i.imgur.com/<wI7GPMe.png" alt="nav">
+<img src="http://i.imgur.com/wI7GPMe.png" alt="nav">
 
 
 
@@ -31,6 +31,7 @@ At end, rename .env.example file in .env and configure it
 <ul>
     <li>HTML 
     <li>CSS 
+    <li>LARAVEL
     <li>BLADE
     <li>BOOTSTRAP
     <li>PHP
