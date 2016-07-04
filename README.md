@@ -5,11 +5,11 @@ Follow the steps:
 
 Clone the project repository:
 `$ git clone https://github.com/misha162008/internet_catalog.git`
-Go to src/ directory:
+<br>Go to src/ directory:
 `$ cd online-shop/src`
-Install dependencies:
+<br>Install dependencies:
 `$ composer install`
-At end, rename .env.example file in .env and configure it
+<br>At end, rename .env.example file in .env and configure it
 
 
 
@@ -23,7 +23,7 @@ At end, rename .env.example file in .env and configure it
 <h3>Catalog</h3>
 <img src="" alt="catalog">
 <h3>Admin panel</h3>
-<img src="http://i.imgur.com/<wI7GPMe.png" alt="nav">
+<img src="http://i.imgur.com/wI7GPMe.png" alt="nav">
 
 
 
