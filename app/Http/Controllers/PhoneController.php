@@ -133,6 +133,7 @@ class PhoneController extends Controller
         $data['phones'] = $allDrinks;
         $data['id'] = $id;
         return view('/admin/phones/phones', $data);
+        // сделать модель для фото добавления и удаления
         } catch (Exception $e) {
             Log::error('Ошибка ');
             return redirect()->back();
@@ -178,5 +179,6 @@ class PhoneController extends Controller
 
         $file->move('tmp', $fileName);
         return $fileName;
+        // лучше сделать отдельный файл с доп функциями
     }
 }

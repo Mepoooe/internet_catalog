@@ -29,7 +29,6 @@ class CatalogPhonesController extends Controller
     // вывод данных с пагинацией    
     public function index()
     {   
-      $price = 100;
         $phones = Phones::paginate(6);
         $data['phones'] = $phones;
         return view('catalog/phones/catalogPhones', $data);
@@ -58,17 +57,17 @@ class CatalogPhonesController extends Controller
         if ($filterValue['max_price'] !== '') {
             $phones = Phones::where('price', '<=', $filterValue['max_price'])
                                 ->where('price', '>=', $filterValue['min_price'])
-                                ->simplePaginate(6);
+                                ->simplePaginate();
         } else {
-            $phones = Phones::where('price', '>=', $filterValue['min_price'])->simplePaginate(6);
+            $phones = Phones::where('price', '>=', $filterValue['min_price'])->simplePaginate();
         }
         if ($filterValue['display'] !== '') {
          $phones = Phones::where('display', '=', $filterValue['display'])
-                          ->simplePaginate(6);
+                          ->simplePaginate();
         }
         if ($filterValue['color'] !== '' ) {
          $phones = Phones::where('color', '=', $filterValue['color'])
-                          ->simplePaginate(6);
+                          ->simplePaginate();
         }
         $data['phones'] = $phones;
         $data['arr'] = $filterValue;
@@ -103,11 +102,14 @@ class CatalogPhonesController extends Controller
         $orderValue['email'] = $request->input('email');
         $orderValue['phone'] = $request->input('phone');
 
+        // лучше реализовать как метод
       Mail::send('/catalog/phones/mail', $orderValue, function($message) use ($orderValue)
         {
           $message->to($orderValue['email'], 'Джон Смит')->from('cj27111992@gmail.com')->subject('Привет!');
+
         });
 
+// языки, админка для админа
       return redirect('/catalog/phones');
     }
 }
