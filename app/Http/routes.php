@@ -57,6 +57,9 @@ Route::group(['middleware' => 'auth'], function() {
     //update item 
     Route::get('/admin/updatePhones/{id}', 'PhoneController@edit');
     Route::post('/admin/phones/{id?}', 'PhoneController@update');
+
+    //timeout faker
+    Route::get('/admin/fakerPhones/', 'PhoneController@faker');
 });
 
 

@@ -24,11 +24,13 @@ class CatalogPhonesController extends Controller
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
-     */
-    // вывод данных с пагинацией 
+     */ 
+
+    // вывод данных с пагинацией    
     public function index()
-    {
-        $phones = Phones::paginate(2);
+    {   
+      $price = 100;
+        $phones = Phones::paginate(6);
         $data['phones'] = $phones;
         return view('catalog/phones/catalogPhones', $data);
     }
@@ -47,21 +49,26 @@ class CatalogPhonesController extends Controller
         $filterValue['min_price']  = $request->input('min_price');
         $filterValue['max_price']  = $request->input('max_price');
 
+        foreach ($filterValue as $key => $value) {
+          if($value == "") {
+            $value = 1;
+          }
+        }
 
-        if ($filterValue['max_price'] != '') {
+        if ($filterValue['max_price'] !== '') {
             $phones = Phones::where('price', '<=', $filterValue['max_price'])
                                 ->where('price', '>=', $filterValue['min_price'])
-                                ->paginate();
+                                ->simplePaginate(6);
         } else {
-            $phones = Phones::where('price', '>=', $filterValue['min_price'])->paginate();
+            $phones = Phones::where('price', '>=', $filterValue['min_price'])->simplePaginate(6);
         }
-        if ($filterValue['display'] != '') {
+        if ($filterValue['display'] !== '') {
          $phones = Phones::where('display', '=', $filterValue['display'])
-                          ->paginate();
+                          ->simplePaginate(6);
         }
-        if ($filterValue['color'] != '' ) {
+        if ($filterValue['color'] !== '' ) {
          $phones = Phones::where('color', '=', $filterValue['color'])
-                          ->paginate();
+                          ->simplePaginate(6);
         }
         $data['phones'] = $phones;
         $data['arr'] = $filterValue;

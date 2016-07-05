@@ -10,6 +10,7 @@ use Mockery\CountValidator\Exception;
 use Intervention\Image\Facades\Image ;
 use Illuminate\Support\Facades\File;
 
+use Faker\Factory as GeneratorShtuchek;
 
 class PhoneController extends Controller
 {
@@ -45,7 +46,7 @@ class PhoneController extends Controller
             $Phones->price = $request->input('price');
             $Phones->display = $request->input('display');
             $Phones->description = $request->input('description');
-            $Phones->img = $file->getClientOriginalName();
+            $Phones->img = $file;
             $Phones->save();
         } catch(Exception $e) {
             Log::error('Ошибка записи');
@@ -126,7 +127,7 @@ class PhoneController extends Controller
             $phones->color = $request->input('color');
             $phones->price = $request->input('price');
             $phones->description = $request->input('description');
-            $phones->img = $file->getClientOriginalName();
+            $phones->img = $file;
             $phones->save();
         $allDrinks = Phones::all()->toArray();
         $data['phones'] = $allDrinks;
@@ -138,9 +139,32 @@ class PhoneController extends Controller
         }
     }
 
+    //faker
+    public function faker () {
+        $faker = \Faker\Factory::create();
+
+        $limit = 10;
+
+        for ($i = 0; $i < $limit; $i++) {
+
+            $Phones = new Phones();
+            $Phones->name = $faker->name;
+            $Phones->color = $faker->colorName ;
+            $Phones->price = $faker->randomNumber(3);
+            $Phones->display = $faker->randomNumber(2);
+            $Phones->description = $faker->catchPhrase;
+            $Phones->img = $faker->image;
+            $Phones->save();
+        }
+        $phones = Phones::paginate(6);
+        $data['phones'] = $phones;
+        return view('catalog/phones/catalogPhones', $data);
+    }
+
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
     public function addImg ($file) {
         $fileName = $file->getClientOriginalName();
+        $fileName = uniqid().$fileName;
         $filePath = '/tmp/' .$fileName;
         if(is_file($filePath)){
             $filePath->destroy();
@@ -153,6 +177,6 @@ class PhoneController extends Controller
             ->save('./tmp/cut-' .$fileName);
 
         $file->move('tmp', $fileName);
-        return $file;
+        return $fileName;
     }
 }

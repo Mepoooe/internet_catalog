@@ -61,7 +61,7 @@ class DrinksController extends Controller
             $drink->price = $request->input('price');
             $drink->volume = $request->input('volume');
             $drink->type_drinks = $request->input('typeDrink');
-             $drink->img = $file->getClientOriginalName();
+             $drink->img = $file;
             $drink->save();
 
             //возвращаем то что в бд
@@ -120,7 +120,7 @@ class DrinksController extends Controller
             $drinks->price = $request->input('price');
             $drinks->volume = $request->input('volume');
             $drinks->type_drinks = $request->input('type_drinks');
-            $drinks->img = $file->getClientOriginalName();
+            $drinks->img = $file;
             $drinks->save();
         $allDrinks = Drinks::all()->toArray();
         $data['drinks'] = $allDrinks;
@@ -174,8 +174,9 @@ class DrinksController extends Controller
     }
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
     public function addImg ($file) {
-            $file->getClientOriginalName();
-            $filePath = '/tmp/$file';
+            $fileName = $file->getClientOriginalName();
+            $fileName = uniqid().$fileName;
+            $filePath = '/tmp/$fileName';
             if(is_file($filePath)){
                 unlink("$filePath"); 
             }
@@ -184,11 +185,10 @@ class DrinksController extends Controller
                 ->resize(100,100, function($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save('./tmp/cut-'.$file->getClientOriginalName());
+                ->save('./tmp/cut-'.$fileName);
 
-            $file->move('tmp', $file->getClientOriginalName());
-            $file->getClientOriginalName();
-            return $file;
+            $file->move('tmp', $fileName);
+            return $fileName;
         }
 
 
