@@ -79,8 +79,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/catalog/catalogPhones/', 'CatalogPhonesController@filter');
 // Заказ 
     Route::get('/catalog/phones/order/{id?}', 'CatalogPhonesController@order');
-    Route::post('/catalog/phones/phoneOrder', 'CatalogPhonesController@sendOrder')
-    ;
+    Route::post('/catalog/phones/phoneOrder', 'CatalogPhonesController@sendOrder');
 
 //Каталог электротоваров
 Route::get('/catalog/electrics', 'ElectricsController@catalog');

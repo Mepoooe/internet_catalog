@@ -63,7 +63,7 @@ class DrinksController extends Controller
             $drink->price = $request->input('price');
             $drink->volume = $request->input('volume');
             $drink->type_drinks = $request->input('typeDrink');
-             $drink->img = $file;
+            $drink->img = $file;
             $drink->save();
 
             //возвращаем то что в бд
@@ -89,7 +89,7 @@ class DrinksController extends Controller
         }
     }
 
-    //  функция для редактирования получает с edit 
+    // функция для редактирования получает с edit
     // пока в разработке
     public function update(Request $request, $id=null) {
         $this->validate($request, [
@@ -110,7 +110,7 @@ class DrinksController extends Controller
 
         $filePath = "./tmp/".$imgName;
 
-        if(is_file($filePath)){
+        if(is_file($filePath)) {
             File::delete("./tmp/cut-".$imgName);
             File::delete("./tmp/".$imgName);
         }

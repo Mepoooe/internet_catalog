@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Electrics;
+use App\goodsImage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,7 +39,7 @@ class ElectricsController extends Controller
             //добавление картинки
             $file = $request->file('image');
             //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-            $file = $this->addImg($file);
+            $file = goodsImage::addImage($file);
 
             $electrics = new Electrics();
             $electrics->title       = $request->input('title');
@@ -47,7 +48,7 @@ class ElectricsController extends Controller
             $electrics->price       = $request->input('price');
             $electrics->status      = $request->input('status');
             $electrics->description = $request->input('description');
-            $electrics->img         = $file->getClientOriginalName();
+            $electrics->img         = $file;
             $electrics->save();
         } catch(Exception $e) {
             Log::error('Ошибка записи');
@@ -63,18 +64,9 @@ class ElectricsController extends Controller
     public function destroy($id = null)
     {
         try {
-            $el = Electrics::where('id', $id)->find($id);
-            $imgName = $el->img;
-
-            $filePath = "./tmp/" .$imgName;
-
-            if(is_file($filePath)){
-                File::delete("./tmp/cut-" .$imgName);
-                File::delete("./tmp/" .$imgName);
-            }
-
+            $el = new Electrics();
+            goodsImage::delImage($el, $id);
             Electrics::destroy($id);
-
             return redirect('/admin/electrics');
         } catch(Exception $e) {
             Log::error('Ошибка удаления');
@@ -105,19 +97,13 @@ class ElectricsController extends Controller
         ]);
 
         try {
-            $el = Electrics::where('id', $id)->find($id);
-            $imgName = $el->img;
+            $el = new Electrics();
+            goodsImage::delImage($el, $id);
 
-            $filePath = "./tmp/" .$imgName;
-
-            if(is_file($filePath)){
-                File::delete("./tmp/cut-" .$imgName);
-                File::delete("./tmp/" .$imgName);
-            }
             $el = Electrics::find($id);
 
             $post = $request->toArray();
-            $file = $this->addImg($post['image']);
+            $file = goodsImage::addImage($post['image']);
 
             $el->title       = $request->input('title');
             $el->name        = $request->input('name');
@@ -125,7 +111,7 @@ class ElectricsController extends Controller
             $el->price       = $request->input('price');
             $el->status      = $request->input('status');
             $el->description = $request->input('description');
-            $el->img         = $file->getClientOriginalName();
+            $el->img         = $file;
             $el->save();
 
             return redirect('/admin/electrics');
@@ -157,7 +143,6 @@ class ElectricsController extends Controller
         $filterValue['min_price']  = $request->input('min_price');
         $filterValue['max_price']  = $request->input('max_price');
 
-//        dd($filterValue['producer']);
 
         if ($filterValue['max_price'] != '') {
             $electrics = Electrics::where('price', '<=', $filterValue['max_price'])
@@ -169,36 +154,14 @@ class ElectricsController extends Controller
         if($filterValue['producer'] != 'все') {
             $electrics = Electrics::where('producer', '=', $filterValue['producer'])->get();
         }
-        /*if($filterValue['name']) {
+        if($filterValue['name'] != 'все') {
             $electrics = Electrics::where('name', '=', $filterValue['name'])->get();
-        }*/
+        }
 
         $data['electrics'] = $electrics;
         $data['arr'] = $filterValue;
-        //dd($data['arr']);
-
 
         return view('catalog/electrics/index', $data);
     }
 
-    /*
-     * Functions
-     */
-    //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-    public function addImg ($file) {
-        $fileName = $file->getClientOriginalName();
-        $filePath = '/tmp/' .$fileName;
-        if(is_file($filePath)){
-            $filePath->destroy();
-        }
-
-        Image::make($file)
-            ->resize(100, 100, function($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save('./tmp/cut-' .$fileName);
-
-        $file->move('tmp', $fileName);
-        return $file;
-    }
 }

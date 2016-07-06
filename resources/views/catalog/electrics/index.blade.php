@@ -3,7 +3,6 @@
 @section('content')
     @include('layouts.nav')
     <div class="row row-offcanvas row-offcanvas-left">
-
         <div class="col-xs-10 col-sm-8">
             <div class="row">
 
@@ -37,6 +36,7 @@
                                     <label for="producer">Производитель: </label><br>
                                     <select name="producer" id="producer">
                                         <option value="все">все</option>
+
                                         @for($i = 0; count($electrics) > $i; $i++)
                                             <option value="{{$electrics[$i]['producer']}}">
                                                 {{$electrics[$i]['producer']}}
@@ -49,6 +49,7 @@
                                     <label for="name">Марка: </label><br>
                                     <select name="name" id="name">
                                         <option value="все">все</option>
+
                                         @for($i = 0; count($electrics) > $i; $i++)
                                             <option value="{{$electrics[$i]['name']}}">
                                                 {{$electrics[$i]['name']}}
@@ -76,7 +77,7 @@
                                                value="<?php if(isset($_GET['max_price'])) {
                                                    echo $_GET['max_price'];
                                                  }
-                                               ?>" 
+                                               ?>"
                                                placeholder="максимальная цена">
                                     </label>
                                 </li>
