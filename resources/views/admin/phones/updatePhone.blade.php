@@ -6,7 +6,16 @@
 @section('content')
             <div class="modal-body">
                     <form action="/admin/phones/{{$id}}" method="post" enctype="multipart/form-data">
-                    
+                    @if(!empty($errors->all()))
+                        <table class="table table-condensed">
+                            
+                            @foreach ($errors->all() as $error)
+                            <tr>
+                                <td class="danger">{{ $error }}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    @endif
                         <div class="form-group">
                             <label for="name">Марка Телефона</label>
                             <input id="name" name="name" type="text" class="form-control" value="{{$phones['name']}}" required>

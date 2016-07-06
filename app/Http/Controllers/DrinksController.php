@@ -29,10 +29,12 @@ class DrinksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /*public function index()
-    {
-        return view('admin/tables/drinks');
-    }*/
+     // отображение списока файлов 
+    public function index() {
+        $drinks = Drinks::all()->toArray();
+        $data['drinks'] = $drinks;
+        return view('admin/tables/drinks', $data);
+    }
 
     public function create() {
         $drinks = array();
@@ -90,7 +92,6 @@ class DrinksController extends Controller
     }
 
     // функция для редактирования получает с edit
-    // пока в разработке
     public function update(Request $request, $id=null) {
         $this->validate($request, [
             'name' => 'max:255',
@@ -128,13 +129,6 @@ class DrinksController extends Controller
         }
     }
 
-    // отображение списока файлов 
-    public function index() {
-        $drinks = Drinks::all()->toArray();
-        $data['drinks'] = $drinks;
-        return view('admin/tables/drinks', $data);
-    }
-
     // удаление файла 
     public function destroy($id=null) {
         if ($id==null) {
@@ -156,24 +150,5 @@ class DrinksController extends Controller
             return redirect()->back();
         }
     }
-    //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-    /*public function addImg ($file) {
-            $fileName = $file->getClientOriginalName();
-            $fileName = uniqid().$fileName;
-            $filePath = '/tmp/$fileName';
-            if(is_file($filePath)){
-                unlink("$filePath"); 
-            }
-
-            $image = Image::make($file)
-                ->resize(100,100, function($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save('./tmp/cut-'.$fileName);
-
-            $file->move('tmp', $fileName);
-            return $fileName;
-        }
-*/
 
 }

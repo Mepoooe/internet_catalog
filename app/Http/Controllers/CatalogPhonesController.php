@@ -14,11 +14,6 @@ class CatalogPhonesController extends Controller
      *
      * @return void
      */
-    // доступ без авторизации
-    /*public function __construct()
-    {// проверка, в данном случае проверяет авторизован или нет
-        $this->middleware('auth');
-    }*/
 
     /**
      * Show the application dashboard.

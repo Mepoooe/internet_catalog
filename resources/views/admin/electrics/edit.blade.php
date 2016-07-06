@@ -1,7 +1,6 @@
 @extends ('layouts.app')
 
 @section('content')
-    {{--{{dd($electrics['status'])}}--}}
     @if(!empty($errors->all()))
         <table class="table table-condensed">
             @foreach ($errors->all() as $error)

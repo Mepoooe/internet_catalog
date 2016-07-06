@@ -66,16 +66,6 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/electrics" method="post" enctype="multipart/form-data">
-                        {{--@foreach($electrics[0] as $key => $value)
-
-                            @if($key !== 'id' && $key !== 'created_at' && $key !== 'updated_at')
-                                <div class="form-group">
-                                    <label for="{{$key}}"> {{$key}} </label>
-                                    <input id="{{$key}}" name="{{$key}}" type="text" class="form-control">
-                                </div>
-                            @endif
-
-                        @endforeach--}}
                         <div class="form-group">
                             <label for="title">Заголовок/Название товара</label>
                             <input id="title" name="title" type="text" class="form-control" required>

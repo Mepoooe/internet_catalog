@@ -64,7 +64,16 @@
                 </div>
                 <div class="modal-body">
                     <form action="/admin/phones" method="post" enctype="multipart/form-data">
-                    
+                      @if(!empty($errors->all()))
+                        <table class="table table-condensed">
+                            
+                            @foreach ($errors->all() as $error)
+                            <tr>
+                                <td class="danger">{{ $error }}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                      @endif
                         <div class="form-group">
                             <label for="name">Марка Телефона</label>
                             <input id="name" name="name" type="text" class="form-control" required>
@@ -108,84 +117,4 @@
         </div>
     </div>
 
-    {{--============================ Pop Up update ============================--}}
-   <!--  <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-       <div class="modal-dialog" role="document">
-           <div class="modal-content">
-               <div class="modal-header">
-                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                   <h4 class="modal-title text-uppercase text-center" id="myModalLabel">Редактировать запись с телофоном <script> innerHTML = id;</script></h4> 
-               </div>
-               <div class="modal-body">
-                   <form action="/admin/phones/" method="post" enctype="multipart/form-data">
-                       {{--@foreach($electrics[0] as $key => $value)
-   
-                           @if($key !== 'id' && $key !== 'created_at' && $key !== 'updated_at')
-                               <div class="form-group">
-                                   <label for="{{$key}}"> {{$key}} </label>
-                                   <input id="{{$key}}" name="{{$key}}" type="text" class="form-control">
-                               </div>
-                           @endif
-                       @endforeach--}}
-                       <div class="form-group">
-                           <label for="name">Марка Телефона</label>
-                           <input id="name" name="name" type="text" class="form-control" required>
-                       </div>
-                       <div class="form-group">
-                           <label for="color">Цвет</label>
-                           <input id="color" name="color" type="text" class="form-control" required>
-                       </div>
-                       <div class="form-group">
-                           <label for="price">Цена</label>
-                           <input id="price" name="price" type="number" class="form-control" required>
-                       </div>
-                       <div class="form-group">
-                           <label for="display">Дисплей</label>
-                           <select name="display" id="display">
-                               <option value="6">6</option>
-                               <option value="5">5</option>
-                               <option value="4">4</option>
-                           </select>
-                       </div>
-                       <div class="form-group">
-                           <label for="description">Описание</label>
-                           <textarea id="description" name="description" type="text" class="form-control" required></textarea>
-                       </div>
-   
-                       <div class="form-group">
-                           <label for="image">Картинка товара</label>
-                           <input id="image" name="image" type="file" class="form-control" required>
-                       </div>
-                           <input name="id" type="hidden" value="">
-   
-                       <input type="submit" class="btn btn-success">
-                       {{csrf_field()}}
-                   </form>
-               </div>
-           </div>
-       </div>
-   </div> -->
-
-<script>
-//перенос данных из элемента во всплывающее окно 
-var copyData = function(button){ 
-    var product = $(button).parents('.item-product'), 
-    titleItem = $(product).find('.title-item'), 
-    h5 = $(product).find('.h5-item').html(), 
-    imgDescription = $(product).find('.img-description').html(), 
-    advantage = $(product).find('.advantage-item').html(), 
-    imageVert = $(product).find('.image-vert').attr('src'), 
-    imageBottom = $(product).find('.img-bottom').attr('src'), 
-    modal = $('#modal2'), 
-    title=titleItem.html(), 
-    bgColor = titleItem.attr('class'); 
-    $(modal).find('.title-item').html(title); 
-    $(modal).find('.title-item').attr('class',bgColor); 
-    $(modal).find('.h5-item').html(h5); 
-    $(modal).find('.img-description').html(imgDescription); 
-    $(modal).find('.advantage-item').html(advantage); 
-    $(modal).find('.image-vert').attr('src',imageVert); 
-    $(modal).find('.img-bottom').attr('src',imageBottom); 
-}
-</script>
 @endsection

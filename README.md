@@ -21,7 +21,7 @@
 <h3> Guide of service</h2>
 <img src="http://i.imgur.com/UmX9Xgy.png" alt="service">
 <h3>Catalog</h3>
-<img src="" alt="catalog">
+<img src="http://i.imgur.com/1G2hEKj.png" alt="catalog">
 <h3>Admin panel</h3>
 <img src="http://i.imgur.com/wI7GPMe.png" alt="nav">
 

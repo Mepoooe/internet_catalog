@@ -39,7 +39,6 @@ class PhoneController extends Controller
             $file = $request->file('image');
             //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
             $file =  goodsImage::addImage($file);
-            //$file->addImage::$file;
 
             $Phones = new Phones();
             $Phones->name = $request->input('name');
@@ -118,7 +117,6 @@ class PhoneController extends Controller
         $data['phones'] = $allDrinks;
         $data['id'] = $id;
         return view('/admin/phones/phones', $data);
-        // сделать модель для фото добавления и удаления
         } catch (Exception $e) {
             Log::error('Ошибка ');
             return redirect()->back();
@@ -146,24 +144,4 @@ class PhoneController extends Controller
         $data['phones'] = $phones;
         return view('catalog/phones/catalogPhones', $data);
     }
-
-    //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-   /* public function addImg ($file) {
-        $fileName = $file->getClientOriginalName();
-        $fileName = uniqid().$fileName;
-        $filePath = '/tmp/' .$fileName;
-        if(is_file($filePath)){
-            $filePath->destroy();
-        }
-
-        Image::make($file)
-            ->resize(100, 100, function($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save('./tmp/cut-' .$fileName);
-
-        $file->move('tmp', $fileName);
-        return $fileName;
-        // лучше сделать отдельный файл с доп функциями
-    }*/
 }
