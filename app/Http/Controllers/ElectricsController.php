@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Electrics;
+use App\goodsImage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -157,7 +158,6 @@ class ElectricsController extends Controller
         $filterValue['min_price']  = $request->input('min_price');
         $filterValue['max_price']  = $request->input('max_price');
 
-//        dd($filterValue['producer']);
 
         if ($filterValue['max_price'] != '') {
             $electrics = Electrics::where('price', '<=', $filterValue['max_price'])
@@ -169,14 +169,12 @@ class ElectricsController extends Controller
         if($filterValue['producer'] != 'все') {
             $electrics = Electrics::where('producer', '=', $filterValue['producer'])->get();
         }
-        /*if($filterValue['name']) {
+        if($filterValue['name'] != 'все') {
             $electrics = Electrics::where('name', '=', $filterValue['name'])->get();
-        }*/
+        }
 
         $data['electrics'] = $electrics;
         $data['arr'] = $filterValue;
-        //dd($data['arr']);
-
 
         return view('catalog/electrics/index', $data);
     }
