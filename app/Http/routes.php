@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function() {
 // Каталог phones
     Route::get('/catalog/phones', 'CatalogPhonesController@index');
 // фильтр 
-    Route::get('/catalog/catalogPhones/{id?}', 'CatalogPhonesController@filter');
+    Route::get('/catalog/catalogPhones/', 'CatalogPhonesController@filter');
 // Заказ 
     Route::get('/catalog/phones/order/{id?}', 'CatalogPhonesController@order');
     Route::post('/catalog/phones/phoneOrder', 'CatalogPhonesController@sendOrder')

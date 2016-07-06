@@ -31,13 +31,13 @@
             <div class="sidebar">
                 <h3 class="filterName">Фильтр</h3>
                 <div class="panel-body">
-                    <form action="/catalog/catalogPhones/">
+                    <form action="/catalog/catalogPhones/" method="get">
                         <ul class="list-group">
                             <li class="list-group-item" >
                              <label>Цвет:</label>
                                 <div class="checkbox">
                                     <select name="color" class="form-control" id="display">
-                                      <option value=""></option>
+                                      <option value="all">Все</option>
                                       <option value="black">Черный</option>
                                       <option value="red">Красный</option>
                                       <option value="yellow">Желтый</option>
@@ -50,11 +50,11 @@
                                 <div class="checkbox">
                                    
                                     <label>Минимальная цена
-                                      <input class="form-control" type="text" name="min_price" value="">
+                                      <input class="form-control" type="text" name="min_price" placeholder="От" >
                                       
                                     </label><br>
                                     <label>Максимальная цена
-                                      <input class="form-control" type="text" name="max_price" value="">
+                                      <input class="form-control" type="text" name="max_price" placeholder="До" >
                                       
                                     </label>
                                 </div>
@@ -63,12 +63,12 @@
                                 <label>Дисплей:</label>
                                 <div>
                                     <select name="display" class="form-control" id="display">
-                                      <option value=""></option>
+                                      <option value="all">Все</option>
                                       <option value="6">6</option>
                                       <option value="5">5</option>
                                       <option value="4">4</option>
                                     </select>
-                                </div>
+                                </div> 
                             </li>
 
                         </ul>
@@ -76,10 +76,10 @@
                     </form>
                 </div>
         </div><!--/span-->
-    
+ 
         <?php
         if(!function_exists('render')){
-             echo $phones->render();
+             echo $phones->links();
             }
         ?>
     </div>

@@ -48,29 +48,26 @@ class CatalogPhonesController extends Controller
         $filterValue['min_price']  = $request->input('min_price');
         $filterValue['max_price']  = $request->input('max_price');
 
-        foreach ($filterValue as $key => $value) {
-          if($value == "") {
-            $value = 1;
-          }
-        }
-
-        if ($filterValue['max_price'] !== '') {
+         if ($filterValue['max_price'] != '') {
             $phones = Phones::where('price', '<=', $filterValue['max_price'])
                                 ->where('price', '>=', $filterValue['min_price'])
-                                ->simplePaginate();
+                                ->simplePaginate(6);
         } else {
-            $phones = Phones::where('price', '>=', $filterValue['min_price'])->simplePaginate();
+            $phones = Phones::where('price', '>=', $filterValue['min_price'])->simplePaginate(6);
         }
-        if ($filterValue['display'] !== '') {
+        if ($filterValue['display'] != 'all') {
          $phones = Phones::where('display', '=', $filterValue['display'])
-                          ->simplePaginate();
+                          ->simplePaginate(6);
         }
-        if ($filterValue['color'] !== '' ) {
+        if ($filterValue['color'] != 'all') {
          $phones = Phones::where('color', '=', $filterValue['color'])
-                          ->simplePaginate();
+                          ->simplePaginate(6);
         }
+
+        $url = $_SERVER['REQUEST_URI'];
+        $phones->setPath($url);
         $data['phones'] = $phones;
-        $data['arr'] = $filterValue;
+        $data['arr'] = $url;
         
         return view('catalog/phones/catalogPhones', $data);
     }
