@@ -27,7 +27,7 @@ class CatalogDrinksController extends Controller
     // вывод данных с пагинацией 
     public function index()
     {
-        $drinks = Drinks::paginate(2);
+        $drinks = Drinks::paginate(6);
         $data['drinks'] = $drinks;
         return view('catalog/drinks/catalogDrinks', $data);
     }
@@ -53,21 +53,23 @@ class CatalogDrinksController extends Controller
         if ($filterValue['max_price'] != '') {
             $drinks = Drinks::where('price', '<=', $filterValue['max_price'])
                                 ->where('price', '>=', $filterValue['min_price'])
-                                ->paginate();
+                                ->paginate(6);
         } else {
-            $drinks = Drinks::where('price', '>=', $filterValue['min_price'])->paginate();
+            $drinks = Drinks::where('price', '>=', $filterValue['min_price'])->paginate(6);
         }
         if ($filterValue['type_alco'] != '' && $filterValue['type_soft'] == '') {
          $drinks = Drinks::where('type_drinks', '=', $filterValue['type_alco'])
-                          ->paginate();
+                          ->paginate(6);
         }
         if ($filterValue['type_soft'] != '' && $filterValue['type_alco'] == '') {
          $drinks = Drinks::where('type_drinks', '=', $filterValue['type_soft'])
-                          ->paginate();
+                          ->paginate(6);
         }
         if ($filterValue['volume'] != '') {
-            $drinks = Drinks::where('volume', '=', $filterValue['volume'])->paginate();
+            $drinks = Drinks::where('volume', '=', $filterValue['volume'])->paginate(6);
         }
+        $url = $_SERVER['REQUEST_URI'];
+        $drinks->setPath($url);
         $data['drinks'] = $drinks;
         $data['arr'] = $filterValue;
         

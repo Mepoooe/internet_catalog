@@ -25,7 +25,6 @@
                 @endfor
             </div>
         </div>
-    </div>
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="list-group">
@@ -53,10 +52,10 @@
                                     <div class="checkbox">
 
                                         <label>Минимальная цена
-                                            <input class="form-control" type="text" name="min_price" value="">
+                                            <input class="form-control" placeholder="От" type="text" name="min_price" value="">
                                         </label><br>
                                         <label>Максимальная цена
-                                            <input class="form-control" type="text" name="max_price" value="">
+                                            <input class="form-control" placeholder="До" type="text" name="max_price" value="">
 
                                         </label>
                                     </div>
@@ -65,7 +64,7 @@
                                     <label>Объем:</label>
                                     <div class="checkbox">
                                         <label>Введите объем в мл
-                                            <input class="form-control" type="text" name="volume" value="">
+                                            <input class="form-control" placeholder="мл" type="text" name="volume" value="">
                                         </label>
                                     </div>
                                 </li>
@@ -83,4 +82,7 @@
                 ?>
             </div>   
         </div>
+    </div>
+
+        
 @endsection

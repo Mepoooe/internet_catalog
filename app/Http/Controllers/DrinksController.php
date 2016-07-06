@@ -105,19 +105,13 @@ class DrinksController extends Controller
             return view('/admin/tables/drinks');
         }
         //удаление файла из папки tmp
-        $drinks = Drinks::where('id', '=', $id)->find($id);
-        $imgName = $drinks->img;
+        $el = new Drinks();
+        goodsImage::delImage($el, $id);
 
-        $filePath = "./tmp/".$imgName;
-
-        if(is_file($filePath)) {
-            File::delete("./tmp/cut-".$imgName);
-            File::delete("./tmp/".$imgName);
-        }
         $drinks = Drinks::find($id);
         $post = $request->toArray();
         $post = $post['img'];
-        $file = $this->addImg($post);
+        $file =  goodsImage::addImage($post);
             $drinks->name = $request->input('name');
             $drinks->price = $request->input('price');
             $drinks->volume = $request->input('volume');
@@ -149,21 +143,9 @@ class DrinksController extends Controller
             return view('/admin/tables/drinks', $data);
         }
         try {
-        $drinks = Drinks::where('id', '=', $id)->find($id);
-        if ($drinks == null) {
-            $drinks = Drinks::all()->toArray();
-            $data['drinks'] = $drinks;
-            return view('/admin/tables/drinks', $data);
-        }
-        $imgName = $drinks->img;
-
-        //удаление файла из папки tmp
-        $filePath = "./tmp/".$imgName;
-
-        if(is_file($filePath)){
-            File::delete("./tmp/cut-".$imgName);
-            File::delete("./tmp/".$imgName);
-        }
+        $el = new Drinks();
+        goodsImage::delImage($el, $id);
+        
         Drinks::destroy($id);
         $drinks = Drinks::all()->toArray();
         $data['drinks'] = $drinks;

@@ -63,16 +63,9 @@ class PhoneController extends Controller
     public function destroy($id = null)
     {
         try {
-            $el = Phones::where('id', '=', $id)->find($id);
-            $imgName = $el->img;
-
-            $filePath = "./tmp/" .$imgName;
-
-            if(is_file($filePath)){
-                File::delete("./tmp/cut-" .$imgName);
-                File::delete("./tmp/" .$imgName);
-            }
-
+            
+            $el = new Phones();
+            goodsImage::delImage($el, $id);
             Phones::destroy($id);
 
             return redirect('/admin/phones');
@@ -108,19 +101,13 @@ class PhoneController extends Controller
         ]);
         try {
         //удаление файла из папки tmp
-        $phones = Phones::where('id', '=', $id)->find($id);
-        $imgName = $phones->img;
-
-        $filePath = "./tmp/".$imgName;
-
-        if(is_file($filePath)){
-            File::delete("./tmp/cut-".$imgName);
-            File::delete("./tmp/".$imgName);
-        }
+        $el = new Phones();
+        goodsImage::delImage($el, $id);
+        
         $phones = Phones::find($id);
         $post = $request->toArray();
         $post = $post['image'];
-        $file = $this->addImg($post);
+        $file =  goodsImage::addImage($post);
             $phones->name = $request->input('name');
             $phones->color = $request->input('color');
             $phones->price = $request->input('price');
