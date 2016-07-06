@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Phones;
+use App\goodsImage;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Mockery\CountValidator\Exception;
 use Intervention\Image\Facades\Image ;
@@ -38,7 +38,8 @@ class PhoneController extends Controller
             //добавление картинки
             $file = $request->file('image');
             //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-            $file = $this->addImg($file);
+            $file =  goodsImage::addImage($file);
+            //$file->addImage::$file;
 
             $Phones = new Phones();
             $Phones->name = $request->input('name');
@@ -106,9 +107,6 @@ class PhoneController extends Controller
             'image' => 'required|image'
         ]);
         try {
-        //if ($id==null) {
-        //    return redirect('/admin/phones');
-        //}
         //удаление файла из папки tmp
         $phones = Phones::where('id', '=', $id)->find($id);
         $imgName = $phones->img;
@@ -163,7 +161,7 @@ class PhoneController extends Controller
     }
 
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-    public function addImg ($file) {
+   /* public function addImg ($file) {
         $fileName = $file->getClientOriginalName();
         $fileName = uniqid().$fileName;
         $filePath = '/tmp/' .$fileName;
@@ -180,5 +178,5 @@ class PhoneController extends Controller
         $file->move('tmp', $fileName);
         return $fileName;
         // лучше сделать отдельный файл с доп функциями
-    }
+    }*/
 }

@@ -9,6 +9,8 @@ use App\Drinks;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 use File;
+use App\goodsImage;
+use Mockery\CountValidator\Exception;
 
 class DrinksController extends Controller
 {
@@ -52,7 +54,7 @@ class DrinksController extends Controller
             //добавление 
             $file = $request->file('image');
             //эта функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-            $file = $this->addImg($file);
+            $file = goodsImage::addImage($file);
             
             //добавление в бд
             Log::notice('Успех записи');
@@ -173,7 +175,7 @@ class DrinksController extends Controller
         }
     }
     //  функция обрезает фото и сохраняет обрезанный вариант с оригиналом, возвращает имя файл
-    public function addImg ($file) {
+    /*public function addImg ($file) {
             $fileName = $file->getClientOriginalName();
             $fileName = uniqid().$fileName;
             $filePath = '/tmp/$fileName';
@@ -190,6 +192,6 @@ class DrinksController extends Controller
             $file->move('tmp', $fileName);
             return $fileName;
         }
-
+*/
 
 }
