@@ -27,7 +27,7 @@ class goodsImage extends Model
         return $fileName;
     }
 
-    public function delImage ($Model, $id)
+    static function delImage ($Model, $id)
     {
         $el = $Model::where('id', $id)->find($id);
         $imgName = $el->img;
@@ -39,6 +39,6 @@ class goodsImage extends Model
             File::delete("./tmp/" .$imgName);
         }
 
-        $Model::destroy($id);
+        //$Model::destroy($id);
     }
 }

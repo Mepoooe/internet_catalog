@@ -63,7 +63,7 @@ class DrinksController extends Controller
             $drink->price = $request->input('price');
             $drink->volume = $request->input('volume');
             $drink->type_drinks = $request->input('typeDrink');
-             $drink->img = $file;
+            $drink->img = $file;
             $drink->save();
 
             //возвращаем то что в бд
