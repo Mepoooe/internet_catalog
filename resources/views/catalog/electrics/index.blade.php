@@ -36,11 +36,13 @@
                                     <label for="producer">Производитель: </label><br>
                                     <select name="producer" id="producer">
                                         <option value="все">все</option>
+
                                         @for($i = 0; count($electrics) > $i; $i++)
                                             <option value="{{$electrics[$i]['producer']}}">
                                                 {{$electrics[$i]['producer']}}
                                             </option>
                                         @endfor
+
                                     </select>
                                 </li>
                                 <li class="list-group-item" >

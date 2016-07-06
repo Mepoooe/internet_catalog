@@ -64,8 +64,8 @@ class ElectricsController extends Controller
     public function destroy($id = null)
     {
         try {
-            $electrics = new Electrics();
-            goodsImage::delImage($electrics, $id);
+            $el = new Electrics();
+            goodsImage::delImage($el, $id);
             Electrics::destroy($id);
             return redirect('/admin/electrics');
         } catch(Exception $e) {
@@ -97,8 +97,8 @@ class ElectricsController extends Controller
         ]);
 
         try {
-            $electrics = new Electrics();
-            goodsImage::delImage($electrics, $id);
+            $el = new Electrics();
+            goodsImage::delImage($el, $id);
 
             $el = Electrics::find($id);
 
